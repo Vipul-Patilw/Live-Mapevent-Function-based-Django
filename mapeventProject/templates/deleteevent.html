@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+#slider{
+overflow-y: scroll; height:52vh;}</style>
+                
+                <div class="msg8">
+                <h1> Delete Events  </h1></div>
+                {% if messages %}
+{% for message in messages %}
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} </strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<script language="JavaScript">
+  function toggle(source) {
+    checkboxes = document.getElementsByName('box');
+    for(var checkbox in checkboxes)
+      checkbox.checked = source.checked;
+  }
+  function toggle(source) {
+    checkboxes = document.getElementsByName('box');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+  </script>
+                  {% if adds %}
+                   <div class="msg8">
+                  <input type="checkbox" onClick="toggle(this)" style="height:20px">
+                  <label for="car">Select All</label>
+                  {{lat}} {{lang}}
+                  </div>
+                  <div id="slider">
+                  {% for add in adds %}
+                 
+                <div class="msg8">
+                                   
+                  
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="checkbox" id="select-all" name="box" style="height:20px"> {% if date > add.todate %} <strike ><h5 style="display:inline-block; width:70%; color:red"> {{add.event}} event Expired!</strike></h5> {% else %} <h5 style="display:inline-block; width:70%"> {{add.event}}</h5>{% endif %}
+                        <input type="text" value="{{add.event}}" name="event" hidden>    
+                </div>
+              
+            
+                {% endfor %}
+                </div>
+                <br>
+                <a href="deleteEvent"><button type="button" class="btn btn-primary"  style="decoration:none;border:none;background-color:grey;margin-right:10px"> Cancel  </button></a><button type="submit" class="btn btn-primary"  style="decoration:none;border:none;background-color:red;display:inline-block;position: absolute;"> Delete  </button> </form>
+               {% else %}
+               <div class="msg8">
+                 <h1>No Events</h1>
+               </div>
+                {% endif %}
+         
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+ <div class="shadow-lg continer " >
+  <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <div class="row" style ="margin:15px">
+  <div class="col-md-6 col-xs-12">
+  <div class="x_panel">
+  <br><br>
+  <div class="x_title">
+  <h2>Import Data From Excel </h2>
+  
+  <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+  <div class="row">
+  <div class="col-md-8 col-sm-12 col-xs-12 form-group">
+  <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Add Events <span class="required">*</span>
+  </label>
+  <br><br> 
+  </div>
+  </div>
+  <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="myfile" class="form-control"><br>
+  <button type="submit" class="btn btn-success" >Upload</button>                            
+  
+ 
+  <br><br>                          
+  </div>
+  </div>
+  </div>
+  </div>
+  </form>
+  </div>
+
+   {% if uploaded_url %}
+   <p>File Uploaded at :<a href ="{{uploaded_file_url}}">{{ uploaded_file_url }}</a></p>
+   {% endif %}

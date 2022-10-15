@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}    
+{% if users  %}
+<div class="msg8">
+  <h1>Staff's Details</h1>
+</div>
+         {% for user1 in users %}
+         
+        <div class="msg8">
+          
+         
+        <h5> {{ user1.first_name.title }} {{user1.last_name.title}} </h5>
+        <P> {{ user1.email}} </p>
+         <strong> <lable>Last Login: </lable></strong> {{ user1.last_login}} <p>Note: you are 5.5hrs ahead of this time</p>
+              <P> <strong> Date of Joined </strong> {{ user1.date_joined}} </p>
+                      
+      </div>
+      {% endfor %}
+      
+      {% else %}
+     <div align="center" class="msg8">
+      <h1>No Staff's Are Their !!</h1>
+      </div>
+      {% endif %}
+   
+        
+  
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}   
+
+      {% if user.is_superuser or user.is_staff%}
+    
+      <div class="msg8">
+        
+        {% regroup events1 by event as event_name %}
+                {% for event in event_name %}
+      <h1>{{ event.grouper }} Event Booked by  Users ({{events1.count }})</h1>
+    {% endfor %}</div>
+      {% for events in events1 %} 
+      <div class="msg8">
+          
+         
+        <h5> <lable>User</lable> :{{ events.full_name }} </h5>
+        <P> {{ events.eventaddress}} </p>
+          <P> {{ events.dtime}} </p>
+            <strong><lable>Event name</lable></strong>: {{events}}
+              <P> <strong> Their date / time  for Event </strong> {{ events.date}}  {{ events.time}} </p>
+                      
+      </div>
+      {% endfor %}
+    
+      
+      {% else %}
+     <div align="center" class="msg8">
+      <h1>No Events booked Yet !!</h1>
+      <p> Book events for free we have excellent events in Pune you can see all events from <strong> <a href="map" style="color:green;">here</a></strong></p>
+    </div>
+      {% endif %}
+   
+        
+  
+{% endblock %}
+</body>
+</html>

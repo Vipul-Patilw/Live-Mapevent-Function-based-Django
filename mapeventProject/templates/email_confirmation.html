@@ -1,0 +1,13 @@
+{% autoescape off %}
+
+Hello {{ fname }} {{ lname }},
+
+Welcome to MCCIA
+
+Congrats! your account is created successfully
+Please confirm your email address in order to activate your account link is given below
+Confirmation Link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+Thanks for visiting our application.
+
+{% endautoescape %}
