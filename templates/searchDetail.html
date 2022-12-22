@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class ="msg8">
+<form class="input-group w-auto my-auto d-flex mb-3" method ="post" action="{% url 'map' %}">
+   {% csrf_token %}
+   <input
+   autocomplete="off"
+   type="search"
+   class="form-control rounded"
+   placeholder="Search event by name or location"
+   name="search"
+   
+   style="min-width: 125px; height:50px"
+   required />
+   <span class="input-group-text border-0  d-flex"
+  style="background-color:orange; height:50px" > <button type="submit" style="background-color:orange;border:none"><i class="fas fa-search"></i
+   ></button></span>
+   </form>
+ {% if events or locations %}
+
+          
+          <p> {% if locations %} {{locations.count}} {% elif events %}{{events.count}}  {% endif %}search results found for <strong>'{{searches}}'</strong></p>
+
+           {% if locations %}   
+                {% for event  in locations %}
+                  <div class="msg8">
+                <h1 style ="color:black">{{event.event}}</h1>
+                <p><strong>Address </strong>{{event.eventaddress}}</p>
+                <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
+                <p>{{event.info}}</p>
+                </div>
+                 {% endfor %}
+           {% elif events %}
+             {% for event in events %}   
+                <div class="msg8">
+              <h1 style ="color:black">{{event.event}}</h1>
+                <p><strong>Address </strong>{{event.eventaddress}}</p>
+                <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
+                <p>{{event.info}}</p>
+                </div>
+                {% endfor %}
+           
+           {% endif %}
+                 
+ {% else %}
+       <div class="msg8">
+       <h2>No search results found for <strong>'{{searches}}'</strong></h2>
+               
+        </div>
+ {% endif %}
+     </div>         
+{% endblock %}
+</body>
+</html>

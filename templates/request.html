@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+                
+                <div class="msg8">
+                <h1> Request send by users for staff accessed </h1></div>
+                {% if messages %}
+{% for message in messages %}
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} </strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+
+                {% if users   %}          
+                  {% for user1 in users %}
+               
+                  
+                <div class="msg8">
+                                   
+                  <h3> {{user1.first_name.title}} {{user1.last_name.title}} </h3>
+                      <p> {{user1.email}} </p>
+                      <form method="post">
+                        {% csrf_token %}
+      
+                          <input type="text"  placeholder="  enter username " value="{{user1.username}}" name="username" hidden>    
+                      <button type="submit" class="btn btn-primary" name="user" style="decoration:none;border:none;background-color:Green;display:inline-block;position: absolute;"> Accept  </button> </form>
+                       <form method="post">
+                         {% csrf_token %}
+
+                         <input type="text"  placeholder="  enter username " value="{{user1.username}}" name="username1" hidden >
+                         <button type="submit" class="btn btn-primary" name="user1" style="decoration:none;border:none;background-color:Red;display:inline-block;position: absolute;margin-left:80px;">  Reject  </button> 
+                        </form>
+         
+                  <Br><br>
+                         
+                </div>
+             
+            
+                {% endfor %}
+            
+            
+             {% else %}
+
+           <div class="msg8">
+           <footer>
+           <div class="footer">
+           
+           </div>
+           
+           </footer>
+          <h5>No requests are pending</h5>
+           </div>
+                {% endif %}
+              
+{% endblock %}
+</body>
+</html>

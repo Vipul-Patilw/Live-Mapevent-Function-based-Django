@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+.blue_button:focus{
+      border-color: blue!important;
+      box-shadow: 0 0 0 0.25rem rgb(240, 255, 255)!important;
+      
+}
+
+.submit_button a{
+color:white!important}
+.pagination a:hover{
+background-color:rgb(255, 213, 128)!important;
+color:orange}
+</style>
+</style>
+                
+                <div class="msg8">
+                <h1> Update Events  </h1></div>
+                {% if messages %}
+{% for message in messages %}
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} </strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% if event_page %}
+                  
+                  {% for event in event_page %}
+                 
+                <div class="msg8">
+                <a href="#" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent{{event.id}}" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><h2 style ="width:80%">{{event.event}}</h2></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent{{event.id}}">
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="text" value="{{event.id}}" name="event_id" hidden >  
+                        <p><strong>Event name:</strong>{{event.event}}</p>
+                        <p><strong>Event info:</strong>{{event.info}}</p>
+                        <p><strong>Event address:</strong>{{event.eventaddress}}</p>
+                        <p><strong>Event datetime:</strong>{{event.fromdate}} TO {{event.todate}} {{event.fromtime}} - {{event.totime}}</p>
+                      <br><br>  </div>
+                          <button type="submit" class="btn btn-primary"  style="decoration:none;border:none;background-color:blue; posting: absolute; margin-top:-70px; margin-left:85%">Edit </button> </form>     
+                </div>
+                {% endfor %}
+                <br>
+              {% if event_page.paginator.num_pages > 1 %}   
+              <nav aria-label="...">
+              <ul class="pagination m-2">
+              <div class="row mb-3 m-0">
+              <div class="col-6">
+              {% if event_page.has_previous %}
+              <li class="page-item mx-2">
+              <a href="?page={{event_page.previous_page_number}}"class="page-link mx-2">Previous</a>
+              </li>
+              {% else %}
+              <li class="page-item disabled mx-2">
+              <a href="" class="page-link ">Previous</a>
+              </li>
+              {% endif %}
+              </div>
+              <div class="col-6">
+              {% if event_page.has_next %}
+              <li class="page-item mx-2 ">
+              <a class="page-link " href="?page={{ event_page.next_page_number }}">Next</a>
+              </li>
+              {% else %}
+              <li class="page-item disabled mx-2">
+              <a class="page-link mx-2" href="">Next</a>
+              </li>
+              {% endif %}
+              </div>
+              </div>
+              <div class="row m-0">
+              {% for pg in event_page.paginator.page_range %}
+              <div class="col-3 mb-3">
+              <li {% if event_page.number == pg %}class="page-item rounded orange_button" aria-current="page" {% else %}class="page-item"{% endif %}>
+              <a class="page-link" href="?page={{pg}}">{{pg}}</a></li>
+              </div>
+              {% endfor %}
+          
+              </div>
+              
+              </ul>
+              </nav>
+              {% endif %}
+         {% else %}
+               <div class="msg8">
+                 <h1>No Events</h1>
+               </div>
+                {% endif %}
+         
+{% endblock %}
+</body>
+</html>

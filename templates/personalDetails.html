@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %} 
+{% if messages %}
+{% for message in messages %}
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} !!</strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<br>
+        
+<div class="msg8">
+<h5 class="nm">{{ user.username }}</h5>
+<p >{{ user.first_name}} {{ user.last_name }} </p><br> </div>
+<div class="msg8"><P class="nm">{{ user.email }}</P><br></div>
+<div class="msg8">
+
+    <a href="pass">CHANGE PASSWORD</a>
+</div>
+<div class="msg8">
+<a href="#"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        LOG OUT   <i style="font-size:15px" class="fa">&#xf011;</i></a>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Logout</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Are you sure you want to logout
+            </div>
+            <div class="modal-footer">
+            
+            <a href="/logout"  style="color:orange" >Yes</a>
+            </div>
+            <div class="modal-footer">
+            <a data-bs-dismiss="modal">No</button>
+            
+    </div>
+    
+</div>
+{% endblock %}
+</body>
+</html>
+
+ 

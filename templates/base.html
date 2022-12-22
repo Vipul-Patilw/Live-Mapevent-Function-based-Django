@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>{% if eventinfo %} {% for event in eventinfo %} Event - {{event.event}}{% endfor %}{% elif eventbasepaging %} {% for event in citynameunique %}Events In {{event.title}} | India {% endfor %} {% else %}Mapevent{% endif %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="rgb(255, 213, 128)">
+
+<link rel="stylesheet" 
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   <link rel="stylesheet" type="text/css" href="dcodes/payment_icons/dc_payment_icons.css" /> 
+   <link rel="stylesheet" type="text/css" href="http://cdn.dcodes.net/2/payment_icons/dc_payment_icons.css" />
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+
+<link href="{% static 'mdb-bootstrap6-kit/css/mdb.dark.min.css' %}">
+<link rel="stylesheet" href="{% static 'mdb-bootstrap6-kit/css/mdb.min.css' %}">
+<link rel="icon" type ="image" href="{% static 'logo-MCCIA.jpg' %}">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+
+<link rel="stylesheet" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+   
+<nav  class="navbar navbar-dark bg-dark"  aria-expanded="false" >
+    <div class="container-fluid">
+    <a class="navbar-brand" href="map" id ="color1" style="font-family: cursive;"><img src="{% static 'logo-MCCIA.jpg' %}" style="height:30px;border-radius:50%;margin-top:-5px; margin-right:5px">Mapevent</a>
+    <div class="dropdown"> <a href="javascript:void(0)" class="dropbtn"><button class="navbar-toggler" id="drop" type="button">
+    Menu <span class="navbar-toggler-icon"></span>
+    </button> </a>
+      <div class="dropdown-content" id="drop2">
+      
+      <form class="input-group w-auto my-auto d-flex" method ="post" action="{% url 'map' %}">
+      {% csrf_token %}
+      <input
+      autocomplete="off"
+      type="search"
+      class="form-control rounded"
+      placeholder="Search Event"
+      name="search"
+      
+      style="min-width: 125px; height:50px;"
+      required />
+      <span class="input-group-text border-0  d-flex"
+     style="background-color:orange; height:50px" > <button type="submit" style="background-color:orange;border:none"><i class="fas fa-search"></i
+      ></button></span>
+      </form> 
+        <a href="map">Home</a>
+      <a href="personaldetails">Profile</a>
+      {% if 'http://127.0.0.1:8000/' == request.build_absolute_uri or 'http://127.0.0.1:8000/map' in request.build_absolute_uri or 'http://127.0.0.1:8000/?page' in request.build_absolute_uri  %}
+      <a href="#" data-bs-toggle="collapse" data-bs-target="#SupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> Locations </a>
+      <div class="collapse navbar-collapse" id="SupportedContent">
+      <div  id="">
+      <br> 
+      {% for location in locations %}
+      
+      <form method ="post" >
+      {% csrf_token %}
+      <input  type="text" name="basecity"  value ="{{location}}" hidden>
+     
+      <button  type="submit" id="locationbutton" style="background-color:rgb(255, 213, 128);
+      color:black;
+      border:none; 
+      width:100%; 
+      text-align:left;
+      padding-left:30px;" 
+      >{{location}}</button>
+      </form>
+      
+      <br>
+      {% endfor %}
+      </div></div>
+     {% endif %}
+      <a href="{% if user.is_superuser or user.is_staff %}booking{% else %}booking-{{user.email}}{% endif %}" >Bookings</a>
+        <a href="importexportevent"> {% if user.is_superuser or user.is_staff %}Import/Export Events{% else %}Events Data{% endif %}</a>
+        <a href="pass">Change Password</a>
+        {% if user.is_superuser or user.is_staff %}
+        <a href="addevent">Add Events</a>
+         <a href="eventeditpage">Edit Events</a>
+        {% endif %}
+        {% if user.is_superuser %}
+        <a href="deleteEvent">Delete Events</a>
+        <a href="staffdata">Staff Details</a>
+        <a href="request">Requests {% if staff %}<span class="request_count">{{staff.count}}</span>{% endif %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  </nav>
+
+{% block content %}
+
+
+  {% endblock %}
+  <script>
+    
+    
+    let data = document.getElementById("drop");
+    let dropdown = document.getElementById("drop2");
+    let mapdropclose = document.querySelector(".mapboxgl-map");
+    let navbarSupportedContent = document.getElementById("navbarSupportedContent");
+    data.addEventListener("click",function(){
+      dropdown.classList.toggle('show_navbar');
+    })
+    mapdropclose.addEventListener('click' , function(){
+    navbarSupportedContent.classList.add("collapse");
+     if(dropdown.classList.contains("show_navbar")){
+          dropdown.classList.remove("show_navbar");
+        }
+   
+     
+     
+      })
+    
+      let dropActive = document.getElementById('dropactive');
+      let msg9 = document.getElementById("msg9");
+      let msgWrapper = document.getElementById("msg_wrapper");
+      let msgHeading = document.getElementById('msg_heading');
+      // navbarSupportedContent.addEventListner("click",function(){
+      // navbarSupportedContent.style.display ="none";
+      // })
+      if (screen.availWidth > 768) {
+        const imageInsert = document.createElement("img");
+        imageInsert.setAttribute("src" , "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ski_trail_rating_symbol-green_circle.svg/480px-Ski_trail_rating_symbol-green_circle.svg.png");
+        imageInsert.style.height = 17 + "px";
+        msgWrapper.insertBefore(imageInsert, msg_wrapper.children[0]);
+        msgWrapper.style.display = "flex";
+        msgWrapper.style.alignItems = "baseline";
+        navbarSupportedContent.classList.add("collapse" , "show");
+        dropActive.style.display = "none";
+        msg9.style.top = 13 + "px";
+        msgWrapper.style.justifyContent = 'space-between';
+
+      }
+      
+  </script>
+
+  
+  <script type="text/javascript" src="{% static 'mdb-bootstrap6-kit/js/mdb.min.js' %}"></script>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="rgb(255, 213, 128)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <!-- JavaScript Bundle with Popper -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+   <link rel="stylesheet" href="css/main.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+   <script src="js/main.js"></script>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+      font-family: "Montserrat", sans-serif;
+  }
+  
+ 
+ .red_button {
+ background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+ font-size: 1.3rem;
+ font-weight: 600;
+ color: #333;
+ }
+ .red_button:focus{
+ border-color: red!important;
+ box-shadow: 0 0 0 0.25rem #FFEAE9!important;
+ 
+ }
+ .yellow_button{
+ background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+ font-size: 1.3rem;
+ font-weight: 600;
+ color: #333;
+ }
+ .orange_button:focus{
+ border-color: orange!important;
+ box-shadow: 0 0 0 0.25rem rgb(255, 245, 238)!important;
+ 
+ }
+
+ 
+ .yellow_button:focus{
+ border-color: lightyellow!important;
+ box-shadow: 0 0 0 0.25rem rgb(255,255,224)!important;
+ 
+ }
+ .submit_button:focus{
+ border-color: #00aa54!important;
+ box-shadow: 0 0 0 0.25rem rgb(113 205 110 / 26%)!important;
+ 
+ }
+ 
+ .orange_button{
+ background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));
+ font-size: 1.3rem;
+ font-weight: 600;
+ color: #333;
+ }
+  
+  a:visited{
+      color:red;
+      background-color: transparent;
+      text-decoration: none;
+  }
+  .button{
+      text-align: center;}
+  a:hover{
+      color:rgb(53, 53, 53);
+      background-color: transparent;
+      text-decoration:none;
+  }
+  .background_color{
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+     background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));}
+  
+  .nav{
+      margin: 0;
+      padding: 15px;
+      background-color:rgb(71, 71, 71);
+  }
+  
+  .nav img{
+      width: 25px;
+      border-radius: 13px;
+      margin-right: 10px;
+      float: left;
+  }
+  #left{
+      float: left;
+  }
+  #right{
+      float: right;
+  }
+  .msgnav{
+      margin: 0;
+      padding: 15px;
+      background-color:#9fa8a3;
+      
+  }
+  
+  
+  .msgnav img{
+      width: 25px;
+      border-radius: 13px;
+      margin-right: 8px;
+      
+  }
+  .cmntnav{
+      margin: 0;
+      padding: 15px;
+      text-align: left;
+      background-color:#585c68;
+  }
+  .cmntnav img{
+      width: 25px;
+      border-radius: 13px;
+      float:left;
+      margin-right: 8px;
+  }
+  .typemsg{
+      position: fixed;
+      bottom: 0px;
+      
+  }
+  .typemsg input{
+      height: 50px;
+      width: 375px;
+      
+  }
+  #clr a:link{
+      color:white;
+      background-color: transparent;
+      text-decoration:none;
+      font-family:Magneto;
+      
+  }
+  #clr a:visited{
+      color:white;
+      background-color: transparent;
+      text-decoration: none;
+      font-family:Magneto;
+     
+      
+  }
+  
+  #clr a:hover{
+      color:grey;
+      text-decoration:none;
+      font-family:Magneto;
+      
+  }
+  
+      
+  input{
+      width: 200px;
+      border-radius: 5px;
+      height: 25px;
+      border-style:solid;
+      border-color: whitesmoke;
+     
+     
+  }
+  .addpic{
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      
+     
+     
+  }
+  input:focus, input:hover {
+        outline:none;
+        border: 1px solid green;
+  } 
+  .birth{
+      width: 200px;
+      border-radius: 5px;
+      height: 25px;
+      background-color:#9fa8a3;
+      }
+      
+  .gender{
+      height: 15px;
+      border-style: none;
+      width:auto;
+      margin:20px;
+      
+  }
+  button{
+      border-radius: 5px;
+      
+  }
+  select{
+      width: 200px;
+      border-radius: 5px;
+      height: 27px;
+      background-color:#9fa8a3;
+      
+  }
+  select:focus, select:hover {
+        outline:none;
+        border: 1px solid green;
+  } 
+  select option {
+      background:#9fa8a3;
+      }
+  .about{
+      margin:50px
+      width: fit-content;
+      height: fit-content;
+      border-style: solid;
+      border-color: rgb(230, 229, 229);
+  }
+  .about img{
+      
+      width: 100px;
+      border-radius: 50px;
+      
+      
+  }
+  .about a:link{
+      color:black;
+      background-color: transparent;
+      text-decoration:none;
+      
+  }
+  .about a:visited{
+      color:black;
+      background-color: transparent;
+      text-decoration: none;
+     
+      
+  }
+  
+  .privacy_policy{
+      background-color: #5d5d5f93;
+      margin: 10px;
+      padding:10px;
+      height: fit-content;
+      border:solid;
+      
+  }
+  .privacy_policy input{
+      margin: 5px;
+      padding: 0px;
+      height: 12px;
+  }
+  
+  button{
+      
+      text-align: center;
+      background-color: #36454F; 
+      border-color: grey;
+      
+      
+  }
+  
+  .content{
+      margin: auto;
+      padding:20px;
+      text-align: center;
+      background-color: white;
+      width: fit-content;
+      border-style: solid;
+      border-color: grey ;
+      border-radius:5px;
+  }
+  
+  .but{
+      margin: 10px;
+      padding: auto;
+      height: 90px;
+      width: 90px;
+      background-color: white ;
+      border-style:outset;
+      border-color: rgb(198, 240, 247);
+      border-radius: 95px;
+      
+  }
+  .contents{
+    
+      margin:auto;
+      padding: 50px;
+      text-align: center;
+      background-color: white;
+      width: fit-content;
+      border-style:solid;
+      border-color: rgb(245, 242, 242);
+      border-radius: 20px;
+      
+      
+  }
+  
+  .content1{
+      margin: auto;
+      padding:20px;
+      text-align: center;
+      background-color: white;
+      width: auto;
+      border-style: solid;
+      border-color: rgb(233, 233, 233);
+      
+  }
+  .contentss{
+  
+      padding:20px 0px 20px 80px;
+      background-color:white;
+      width: auto;
+      border-style:solid;
+      border-color: black;
+      
+  }
+  .contentss1{
+      float: left;
+      padding:20px 0px;
+      background-color: white ;
+      text-align:center;
+      width: 50%;
+      border-style:solid;
+      border-color: rgb(245, 242, 242);
+      
+  }
+  .contentsss{
+      float: left;
+      padding:20px 20px;
+      background-color: whitesmoke;
+      width:50%;
+      border-style:solid;
+      border-color: rgb(245, 242, 242);
+      
+  
+  }
+  .content button{
+      width: 172px;
+      height: 25px;
+     
+  }
+  .content1 button{
+      width: 172px;
+      height: 25px;
+  }
+  .story img{
+      width: 356px;
+      height:80px;
+      image-resolution: cover;
+  
+      
+  
+  }
+  .story{
+  
+      overflow-x:auto;
+      overflow-y:hidden;
+      white-space: nowrap;
+  }
+  .username img{
+      width: 35px;
+      border-radius: 18px;
+      float: left;
+      margin-right: 3px;
+      box-sizing: border-box;
+  
+  }
+  .username{
+      margin: fit-content;
+      padding: fit-content;
+      height: 38px;
+      border:solid;
+      border-color: #61646e;
+      border-width: 2px;
+      color:rgb(46, 45, 45);
+      box-sizing: border-box;
+      font-size: 25px;
+      
+      
+      
+      
+  }
+  .username a:link{
+      color:rgb(37, 37, 37);
+      background-color: transparent;
+      text-decoration:none;
+      
+  }
+  
+  .username a:visited{
+      color:rgb(37, 37, 37);
+      background-color: transparent;
+      text-decoration: none;
+      
+  
+  }
+  
+  .username a:hover{
+      color:rgb(53, 53, 53);
+      background-color: transparent;
+      text-decoration:none;
+  }
+  .msg img{
+      width: 35px;
+      border-radius: 18px;
+      float: left;
+      margin-right: 10px;
+      box-sizing: border-box;
+  
+  }
+  .msg{
+      margin: auto;
+      padding: 20px;
+      height: auto;
+      border:solid;
+      border-color: grey;
+      border-width: 2px;
+      color: black ;
+      box-sizing: border-box;
+      background-color: whitesmoke;
+      
+  }
+  #display_image{
+      margin-top: 15px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+   }
+  .msg9{
+      margin: auto;
+      padding: 20px;
+      height: auto;
+      border-width: 2px;
+      color: black ;
+      box-sizing: border-box;
+      background-color: whitesmoke;
+      
+  }
+  .msg a:link{
+      color:black;
+      background-color: transparent;
+      text-decoration:none;
+      
+  }
+  
+  .msg a:visited{
+      color:black;
+      background-color: transparent;
+      text-decoration: none;
+      
+  
+  }
+  
+  .msg a:hover{
+      color:rgb(53, 53, 53);
+      background-color: rgb(53, 53, 53);
+      text-decoration:none;
+  }
+  .image {
+      margin: fit-content;
+      border: solid;
+      border-color: #61646e;
+      border-width: 1px;
+      padding: fit-content;
+      height: 357px;
+      box-sizing: border-box;
+      background-color: ivory;
+      
+  }
+  .image img{
+      margin: 0px;
+      padding: center;
+      height: 355px;
+      
+      box-sizing: border-box;
+  }
+  
+  .bodyclr{
+      background-color: #e3e0cf;
+  }
+  .account{
+      margin: 2px;
+      padding: 2px;
+  }
+  .account img{
+      width: 100px;
+      border-radius: 50px;
+      float: left;
+      
+  }
+  .follower{
+      margin-left: 120px;
+      height: 38px;
+      color:rgb(46, 45, 45);
+      box-sizing: border-box;
+      background-color:  #585c68;
+      
+  }
+  
+  .follower a:link{
+      color:black;
+      background-color: transparent;
+      text-decoration:none;
+      
+  }
+  
+  .follower a:visited{
+      color:black;
+      background-color: transparent;
+      text-decoration: none;
+      
+  
+  }
+  
+  .follower a:hover{
+      color:rgb(53, 53, 53);
+      background-color: rgb(97, 95, 95);
+      text-decoration:none;
+  }
+  .posts img{
+     height: 117px;
+  
+  }
+  #color{
+      border-collapse: collapse;
+      background-color: white;
+  }
+  #color td tr{
+      border:0px solid
+  }
+  .response img{
+      width: 40px;
+      margin-right: 10px;
+  }
+  #prop{
+      width: 25px;
+      float: right;
+  }
+  body{
+  padding: 2px;  
+  background-color: white;
+  }
+  #file{
+      display: none;
+  }
+  
+  #uploadBtn{
+      height: 40px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      color: wheat;
+      line-height: 30px;
+      font-family: sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      display: none;
+  }
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+</style>  
+    <title>Welcome to MCCIA Admin Login page </title>
+</head>
+
+</style>
+<body>
+    <div class="background_color">
+        <div id="clr"><a href= "map">MCCIA ADMIN LOGIN</a></div>
+  
+</div>
+           
+     </div>
+    
+
+    
+     <div class="content" >
+        <a href="adminsignIn" style="color:green;float:right;font-size:10px;">SIGN IN AS STAFF</a>
+        {% if messages%}
+         {% for message in messages %}
+        <div class="alert alert-{{ messages }} alert-dismissible fade show my-0" role="alert" style="background-color:#FFFFE0;color:red;border-style:solid;border-color:red;width:400px">
+            
+            {{ message }} 
+          
+       </div>
+      {% endfor %}
+       {% endif %}
+       <br> 
+      <form method="post">
+      {% csrf_token %}
+      
+      <div class="input-field">
+     <input class="input_fields" type="text" name="username"  required>
+     <label>username</label><br><br><br>
+       </div> 
+
+        <div class="input-field">
+        <input   type="password" name="Loginpassword" required>
+        <label >Password</label>
+        <a href="forgotPassword" style="float:right">Forgot your password?</a>
+        </div><br><br><br>
+    <button type="submit" class="btn btn-primary orange_button">LOGIN</button></a><br><br>
+   
+      </form>
+      
+        <br><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<style type="text/css">
+
+.orange_button:focus{
+        border-color: orange!important;
+            box-shadow: 0 0 0 0.25rem #ffd7b5!important;
+
+}
+
+.orange_button{
+font-size:15px;
+color:black}
+.main_card{
+  margin-top:-25px} 
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<style> 
+.para{
+font-size:12px}
+#panel{
+  display: none;
+  }
+.recharge_accordian_body{
+background-color:#ffd7b5!important;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+
+}
+.accordion-button:not(.collapsed){
+
+border-bottom: solid orange 1px;
+color:#e91e63!important;
+background-color:#ffd7b5!important;
+border-bottom-left-radius:0px!important;
+border-bottom-right-radius:0px!important;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e91e63'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+hr{
+color:orange}
+.amount_badge{
+color:#e91e63!important;
+background-color:#ffd7b5!important;
+}
+.accordion-item,.accordion-header,.accordion-button{
+background-color:rgb(255, 213, 128)!important}
+</style>
+<div class="accordion accordion-borderless" id="accordionFlushExample">
+     <div class="accordion-item ">
+     <h2 class="accordion-header" id="flush-heading{{page.id}}X">
+     <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+     data-mdb-target="#flush-collapse{{page.id}}X" aria-expanded="true" aria-controls="flush-collapseOneX">
+    <div class=""> <span class="badge badge-primary amount_badge rounded-pill mx-2 p-2 my-2">{{ page.event }} </span>
+   </div>
+     </button>
+     </h2>
+     <div id="flush-collapse{{page.id}}X" class="accordion-collapse collapse "
+     aria-labelledby="flush-heading{{page.id}}X" data-mdb-parent="#accordionFlushExample">
+     <div class="accordion-body recharge_accordian_body">
+ <strong>{{ page.event }}</strong><p>{{ page.info |slice:":255" }}..<br><br><a href="eventdetails-{{page.id}}" style ="border:none;color:orange"><strong> read more..</strong></a> <br><br><b> Address:</b><a href="locate-{{page.lat}}&{{page.lang}}" style="margin-left: 10px;"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"><u>{{ page.eventaddress }}</u></a>
+ <br><b> Date/Time:</b>  {{ page.fromdate }} {{ page.fromtime }} to {{ page.todate }} {{ page.totime }}</p>
+ <br>
+ <a href="bookingform-{{page.id}}-{{user.email}}" class="btn btn-primary orange_button" >Book</a>
+     </div>
+     </div>
+     
+     </div>
+ 
+ </div>
