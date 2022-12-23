@@ -151,8 +151,8 @@ FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.MemoryFileUploadHandler',
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATICFILES_DIR = [os.path.join(BASE_DIR,"static/")]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Default primary key field type
