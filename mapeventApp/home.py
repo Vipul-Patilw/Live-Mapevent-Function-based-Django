@@ -1,5 +1,6 @@
 from mapeventApp.models import AddEvent,Staff,Login
 from django.shortcuts import redirect, render
+from geopy.geocoders import Nominatim
 from django.core import paginator
 from django.template.loader import render_to_string
 import datetime
@@ -54,7 +55,7 @@ def map(request):
             "end_pagination": True if page >= p.num_pages else False,
         })
 	
-
+	
 	
 	#if request.method =="POST":
 #	if 'satelite' in request.POST:

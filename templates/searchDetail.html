@@ -36,8 +36,8 @@
               <h1 style ="color:black">{{event.event}}</h1>
                 <p><strong>Address </strong>{{event.eventaddress}}</p>
                 <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
-                <p>{{event.info}}</p>
-                </div>
+                <p>{{event.info|slice:":255"}}..</p>
+            <a href="eventdetails-{{event.id}}" style ="border:none;color:orange"><strong> read more..</strong></a>    </div>
                 {% endfor %}
            
            {% endif %}

@@ -8,7 +8,8 @@ from mapeventApp.eventsform import addevent,showbookings,staffrequest,updateEven
 from .views import changePassword
 urlpatterns = [
    path('sign',views.index, name='sign'),
-   path('logininfo',views.index, name='sign'),
+   path('logininfo',views.index, name='sign'),#path('map',home.base),
+   
    path('importexportevent', views.import_export_event_csv,name="importexport event"),  
       
   #  path('importexportevent',views.Import_csv, name='importexportvent'),
