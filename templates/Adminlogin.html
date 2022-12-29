@@ -577,13 +577,13 @@
   }
   
 </style>  
-    <title>Welcome to MCCIA Admin Login page </title>
+    <title>Admin Login | Mapevent </title>
 </head>
 
 </style>
 <body>
     <div class="background_color">
-        <div id="clr"><a href= "map">MCCIA ADMIN LOGIN</a></div>
+        <div id="clr"><a href= "map">MAPEVENT ADMIN</a></div>
   
 </div>
            
@@ -593,15 +593,14 @@
     
      <div class="content" >
         <a href="adminsignIn" style="color:green;float:right;font-size:10px;">SIGN IN AS STAFF</a>
-        {% if messages%}
-         {% for message in messages %}
-        <div class="alert alert-{{ messages }} alert-dismissible fade show my-0" role="alert" style="background-color:#FFFFE0;color:red;border-style:solid;border-color:red;width:400px">
-            
-            {{ message }} 
-          
-       </div>
-      {% endfor %}
-       {% endif %}
+     {% if messages%}
+     {% for message in messages %}
+     <div class="alert alert-{{ messages }} alert-dismissible fade show my-0" role="alert" style="background-color:#FFFFE0;color:red;border-style:solid;border-color:red;">
+     {{ message }}
+     
+     </div>
+     {% endfor %}
+     {% endif %}
        <br> 
       <form method="post">
       {% csrf_token %}
@@ -616,7 +615,7 @@
         <label >Password</label>
         <a href="forgotPassword" style="float:right">Forgot your password?</a>
         </div><br><br><br>
-    <button type="submit" class="btn btn-primary orange_button">LOGIN</button></a><br><br>
+    <button type="submit" class="btn btn-primary orange_button" style="height:35px">LOGIN</button></a><br><br>
    
       </form>
       

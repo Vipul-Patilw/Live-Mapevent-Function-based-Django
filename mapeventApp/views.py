@@ -22,7 +22,7 @@ from . tokens import generate_token
 from django.core.mail import EmailMessage
 from .models import AddEvent
 import datetime as dt
-#import pandas as pd
+import pandas as pd
 import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -121,7 +121,7 @@ def index(request):
 				return redirect("/sign")
 				
 
-			messages.success(request, first_name.title() + " " + last_name.title())
+			#messages.success(request, first_name.title() + " " + last_name.title())
 			myuser = User.objects.create_user(username,email,password)
 			myuser.first_name = first_name
 			myuser.last_name = last_name
@@ -161,7 +161,7 @@ def index(request):
 		#return render(request, 'logininfo.html')	
 		return render(request, 'logininfo.html')
 	except:
-		messages.error(request,"since google disabled the smpt from 30may2022 we are not able to send mail.So you don't need confirmation link we activate your account you can login now")
+	#	messages.error(request,"since google disabled the smpt from 30may2022 we are not able to send mail.So you don't need confirmation link we activate your account you can login now")
 		return redirect('login')
 	
 	#  return HttpResponse("vipul patil")
@@ -191,7 +191,7 @@ def adminsign(request):
 				pass
 				
 			else:
-				messages.error(request,"password should be at least 6 character long. contain both uppercase and lowercase character, at least one alpha numeric and one special charecter  (eg:Test@123)")
+		#		messages.error(request,"password should be at least 6 character long. contain both uppercase and lowercase character, at least one alpha numeric and one special charecter  (eg:Test@123)")
 				return redirect("/adminsignIn")
 			messages.success(request, first_name.title() + " " + last_name.title())
 			myuser = User.objects.create_user(username,email,password)

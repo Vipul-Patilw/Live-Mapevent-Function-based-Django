@@ -81,7 +81,8 @@ div.pagination a {
    box-sizing: border-box;
    background-color:rgb(255, 213, 128);
    float:left;
-   overflow-y: scroll; height:84vh;
+   overflow-y: scroll; 
+   height:82vh;
    z-index: 3;
    position: absolute;
    margin-top:-48px;

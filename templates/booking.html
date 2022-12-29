@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if messages %}
-{% for message in messages %}
- <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} </strong> Event has been booked successfully !!
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endfor %}
-{% endif %}
+
 {% if events %}
          {% for event in events %}
          

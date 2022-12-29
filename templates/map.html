@@ -7,6 +7,13 @@
 <body>
   {% block content %}
 <div id="menu">
+{% if messages %}
+{% for message in messages %}
+ <div class="alert alert-success { alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} </strong> Event has been booked successfully !!
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 </div>
 <div id="dropactive">
 <a href="#" class="btn btn-primary orange_button text-center" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="height:30px; width:30px;padding:0px;padding-top:4px"><i class="fas fa-solid fa-circle" style="color:green;font-size:15px"></i></a></div><br><br>
@@ -32,14 +39,22 @@
 
 
 
-<div class="infinite-item">
+<div class="infinite-container">
 
+
+
+<div class="accordion accordion-borderless infinite-item" id="accordionFlushExample">
 <!--  <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
-   {% for page in eventbasepaging %}
+   {% for page in eventbasepaging  %}
       {% include 'list-events.html' %} 
    {% endfor %}
  
 </div>
+
+
+</div>
+<span class="loader" style ="margin-left:50%;color:orange"></span>
+
  
  <br>
  

@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'mapeventApp.context_processors.locations',
+                'mapeventApp.context_processors.base',
                
             ],
         },
@@ -152,7 +153,7 @@ FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
 STATIC_URL = '/static/'
-STATICFILES_DIR = [os.path.join(BASE_DIR,"static/")]
+STATICFILES_DIRS = (os.path.join(BASE_DIR,"static/"),)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Default primary key field type

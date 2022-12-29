@@ -4,7 +4,10 @@
 
 {% block content %} 
 
-        
+ <style type="text/css">
+ 
+ 
+ </style>       
 <div class="msg8">
 {% for event in eventinfo %}
 <h1 class="nm">{{ event.event }}</h1>
@@ -12,6 +15,12 @@
 <p><strong>Datetime: </strong>{{ event.fromdate }} to {{event.todate}} {{event.fromtime}} - {{event.totime}}</p><br>
 <h3>About the event</h3>
 <p>{{event.info}}</p>
+
+<br><br><b> Locate on map:</b><a href="locate-{{event.lat}}&{{event.lang}}" style="margin-left: 10px;"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"><u>{{ event.eventaddress }}</u></a><br><br>
+<br>
+<div class="text-center">
+<a href="bookingform-{{event.id}}-{{user.email}}" class="btn btn-primary orange_button" >Book</a>
+   </div>
 {% endfor %}
 </div>
 {% endblock %}

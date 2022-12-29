@@ -62,11 +62,11 @@ def events(request):
            	     email = EmailMessage(emailsub, emailbody, from_mail, to_mail)
            	     email.fail_silently = True
            	     email.send()
-           	     return redirect('/booking')
+           	     return redirect('/map')
            
            
            except:
-           	messages.error(request,"mail has not sent cause Google ban smtp feature from 30may 2022. you can check your bookings from here;")
-           	return redirect('/booking')
+           	#messages.error(request,"mail has not sent cause Google ban smtp feature from 30may 2022. you can check your bookings from here;")
+           	return redirect('/map')
     return render(request, 'eventForm1.html')
 			        
