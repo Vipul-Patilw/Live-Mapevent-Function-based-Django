@@ -615,7 +615,9 @@
         <div class="input-field">
         <input   type="password" name="Loginpassword" required>
         <label >Password</label>
-        <a href="forgotPassword.html" style="float:right">Forgot your password?</a>
+        {% if messages %}
+        <a href="forgotPassword" style="float:right">Forgot your password?</a>
+        {% endif %}
         </div><br><br><br>
     <button type="submit" class="btn btn-primary orange_button" style="height:35px">LOGIN</button><br><br>
    
