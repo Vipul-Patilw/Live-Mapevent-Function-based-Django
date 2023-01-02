@@ -1,4 +1,4 @@
-# Completed-Mapevent-Function-based-Django
+# Live-Mapevent-Function-based-Django
 Superuser
 
 Username: admin
