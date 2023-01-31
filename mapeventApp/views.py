@@ -33,6 +33,67 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
  
 import csv
+import fitz
+# importing the qrcode module  
+import qrcode  
+from mapeventProject.settings import BASE_DIR
+def qr_code_generator(request):
+	try:
+		if request.method =="POST" and request.FILES['qr_pdf_file']:
+			myfile = request.FILES['qr_pdf_file']    
+			number_code = request.POST.get('number_code')
+			date_of_submitting = request.POST.get('date_of_submitting')
+			company= request.POST.get('company')
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			uploaded_file_url = fs.url(filename)
+			pdf_file = str(BASE_DIR)+ str(uploaded_file_url)
+			print(pdf_file) 
+			obj_qr = qrcode.QRCode(  
+    version = 1,  
+    error_correction = qrcode.constants.ERROR_CORRECT_L,  
+    box_size = 10,  
+    border = 4,  
+)  
+			# using the add_data() function
+			dst_pdf =   str(number_code) + "-" + str(company) + "-" + str(date_of_submitting) + ".pdf"
+			dst_pdf_filename = str(BASE_DIR) + '\media\pdfs\\' + dst_pdf
+			dst_for_qr = 'http://127.0.0.1:8000/media/pdfs/' + dst_pdf
+			obj_qr.add_data(dst_for_qr)
+			print(f"locating_test: {obj_qr}")  
+			# using the make() function  
+			obj_qr.make(fit = True)  
+			# using the make_image() function  
+			qr_img = obj_qr.make_image(fill_color = "white", back_color = "black")  
+			# saving the QR code image  
+			qr_img.save(str(BASE_DIR)+"\media\images\qr-resume.png")
+			src_pdf_filename = pdf_file
+			img_filename = str(BASE_DIR) +'\media\images\stamp.png'
+			img_filename2 = str(BASE_DIR) +'\media\images\qr-resume.png'
+			# http://pymupdf.readthedocs.io/en/latest/rect/
+			# Set position and size according to your needs
+			img_rect = fitz.Rect(150,20,250,990)
+			img_rect2 = fitz.Rect(380,450,620,690)
+			document = fitz.open(src_pdf_filename)
+
+			# We'll put image on first page only but you could put it elsewhere
+			page = document[0]
+			page.insert_image(img_rect, filename=img_filename)
+			page.insert_image(img_rect2, filename=img_filename2)
+			# See http://pymupdf.readthedocs.io/en/latest/document/#Document.save and
+			# http://pymupdf.readthedocs.io/en/latest/document/#Document.saveIncr for
+			# additional parameters, especially if you want to overwrite existing PDF
+			# instead of writing new PDF
+			document.save(dst_pdf_filename)
+
+			document.close()
+
+			return render(request, 'qr_code_generator.html',{'dst_pdf':dst_for_qr})
+	except Exception as identifier:
+		messages.error(request,f"{identifier}")
+		return redirect('qr_generator')
+	return render(request, 'qr_code_generator.html',{})
+
 def import_export_event_csv(request):
  
     if 'export_event' in request.POST:
