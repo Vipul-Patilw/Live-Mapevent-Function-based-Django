@@ -11,7 +11,7 @@ urlpatterns = [
    path('logininfo',views.index, name='sign'),#path('map',home.base),
    
    path('importexportevent', views.import_export_event_csv,name="importexport event"),  
-      
+        path('qr_generator',views.qr_code_generator,name="qr_generator") ,   
   #  path('importexportevent',views.Import_csv, name='importexportvent'),
    path('login',views.sign, name='login'),
    path('map',home.map, name='map'),

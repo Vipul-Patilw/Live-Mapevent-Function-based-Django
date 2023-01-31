@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'mapeventProject.wsgi.application'
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'mapeventProject',
 #         'USER': 'root',
-#         'PASSWORD':'Velshet@143',
+#         'PASSWORD':'',
 #         'HOST':'localhost',
 #         'PORT': '',
 #         'OPTIONS': {

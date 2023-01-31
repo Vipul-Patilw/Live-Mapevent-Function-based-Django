@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} !!</strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<div class="row" style ="margin:15px">
+    <div class="col-md-6 col-xs-12">
+    <div class="x_panel">
+    <br><br>
+    <div class="x_title">
+    <h2>QR Code Generator</h2>
+    {% if dst_pdf %}
+<a href="{{dst_pdf}}" target="_blank"><u>Download The Generated Pdf</u></a>
+<embed src="{{dst_pdf}}" type="application/pdf" height="500px" width="960px">
+    {% else %}
+    <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <div class="row">
+    <div class="col-md-8 col-sm-12 col-xs-12 form-group">
+    <p>Please upload pdf to get attached with gernerated qr code of given file<span class="required">*</span>
+    </p>
+   
+    </div>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="row">
+    {% csrf_token %}
+    <!-- <embed src="http://127.0.0.1:8000/media/pdfs/34543543-comp-C-2023-01-25.pdf"  height="500px" width="960px"> -->
+  <div class="col-md-6"> <img src="http://127.0.0.1:8000/static/logo-Mapevent.jpg" ></div>
+  <div class="col-md-6">  <input type="number" name="number_code" class="form-control" placeholder="enter given number code" required><br>
+    <input type="date" name="date_of_submitting" class="form-control" placeholder="enter date of submitting" required><br>
+    <select name="company" id="company" class="form-select" required>
+        <option value="">Select Company</option>
+        <option value="comp-A">comp-A</option>
+        <option value="comp-B">comp-B</option>
+        <option value="comp-C">comp-C</option>
+        <option value="comp-D">comp-D</option>
+      </select>
+      <br>
+    <input type="file" name="qr_pdf_file" class="form-control" required><br>
+    <button type="submit" class="btn btn-success orange_button" >Upload</button>  
+</div> 
+  
+                            
+</form>
+   
+    <br><br>                          
+    </div>
+    {% endif %}
+    </div>
+    </div>
+    </div>
+    
+{% endblock %}
