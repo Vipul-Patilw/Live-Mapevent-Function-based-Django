@@ -23,21 +23,46 @@
 
            {% if locations %}   
                 {% for event  in locations %}
-                  <div class="msg8">
-                <h1 style ="color:black">{{event.event}}</h1>
-                <p><strong>Address </strong>{{event.eventaddress}}</p>
-                <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
-                <p>{{event.info}}</p>
-                </div>
+               
+                <div class="msg8 row">
+                  {% if event.event_poster %}
+                  <div class="col-md-6 mb-5">
+                    <img src="{{event.event_poster.url}}" class="img-responsive img-fluid w-50">
+                  </div>
+                  {% endif %}
+                 <div class="col-md-6">
+                  <h1 style ="color:black">{{event.event}}</h1>
+                  <p><strong>Address </strong>{{event.eventaddress}}</p>
+                  <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
+                  <p>{{event.info|slice:":255"}}..</p>
+                  {% if user.is_superuser or user.is_staff %}
+                  <a  href="editevents/{{event.id}}" class="btn btn-primary"  style="decoration:none;border:none;background-color:blue; posting: absolute; margin-top:-70px; margin-left:77%">Edit </a>    
+                  {% else %}
+              <a href="eventdetails-{{event.id}}" style ="border:none;color:orange"><strong> read more..</strong></a>   
+                {% endif %}
+            </div>
+                 </div>
                  {% endfor %}
            {% elif events %}
              {% for event in events %}   
-                <div class="msg8">
-              <h1 style ="color:black">{{event.event}}</h1>
+                <div class="msg8 row">
+                  {% if event.event_poster %}
+                <div class="col-md-6 mb-5">
+                  <img src="{{event.event_poster.url}}" class="img-responsive img-fluid w-50">
+                </div>
+                {% endif %}
+               <div class="col-md-6">
+                <h1 style ="color:black">{{event.event}}</h1>
                 <p><strong>Address </strong>{{event.eventaddress}}</p>
                 <p>{{event.fromdate}} {{event.fromtime}} to {{event.todate}} {{event.totime}}</p>
                 <p>{{event.info|slice:":255"}}..</p>
-            <a href="eventdetails-{{event.id}}" style ="border:none;color:orange"><strong> read more..</strong></a>    </div>
+                {% if user.is_superuser or user.is_staff %}
+                <a  href="editevents/{{event.id}}" class="btn btn-primary"  style="decoration:none;border:none;background-color:blue; posting: absolute;">Edit </a>    
+                {% else %}
+            <a href="eventdetails-{{event.id}}" style ="border:none;color:orange"><strong> read more..</strong></a>   
+              {% endif %} </div>
+               </div>
+          
                 {% endfor %}
            
            {% endif %}

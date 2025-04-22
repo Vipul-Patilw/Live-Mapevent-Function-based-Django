@@ -110,11 +110,15 @@
     let dropdown = document.getElementById("drop2");
     let mapdropclose = document.querySelector(".mapboxgl-map");
     let navbarSupportedContent = document.getElementById("navbarSupportedContent");
+    
     data.addEventListener("click",function(){
+     
       dropdown.classList.toggle('show_navbar');
     })
+    
     mapdropclose.addEventListener('click' , function(){
     navbarSupportedContent.classList.add("collapse");
+    
      if(dropdown.classList.contains("show_navbar")){
           dropdown.classList.remove("show_navbar");
         }
@@ -124,12 +128,29 @@
       })
     
       let dropActive = document.getElementById('dropactive');
+      let dropIcon = document.getElementById('drop_icon');
+      let locat_n_map = document.getElementById('locat_n_map');
       let msg9 = document.getElementById("msg9");
       let msgWrapper = document.getElementById("msg_wrapper");
       let msgHeading = document.getElementById('msg_heading');
+      let navbarsupportedcontent = document.getElementById('navbarSupportedContent');
       // navbarSupportedContent.addEventListner("click",function(){
       // navbarSupportedContent.style.display ="none";
       // })
+      dropActive.addEventListener('click' , function(){
+
+      dropIcon.classList.remove('fa-close')
+        dropIcon.classList.add('fa-circle')
+      })
+      locat_n_map.addEventListener('click' , function(){
+
+        dropIcon.classList.remove('fa-close')
+        dropIcon.classList.add('fa-circle')
+        if (screen.availWidth < 768) {
+          navbarsupportedcontent.classList.remove('show')
+        }
+      
+})
       if (screen.availWidth > 768) {
         const imageInsert = document.createElement("img");
         imageInsert.setAttribute("src" , "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ski_trail_rating_symbol-green_circle.svg/480px-Ski_trail_rating_symbol-green_circle.svg.png");

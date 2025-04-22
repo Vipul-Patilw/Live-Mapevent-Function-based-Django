@@ -1,4 +1,7 @@
+.accordion-button:focus {
 
+  box-shadow: none!important;
+}
 
 #color{
  font-family: Arial, Helvetica, sans-serif;
@@ -77,12 +80,12 @@ div.pagination a {
    #msg9{
    margin: auto;
    padding: 20px;
-   width:300px;
+   width:320px;
    box-sizing: border-box;
    background-color:rgb(255, 213, 128);
    float:left;
    overflow-y: scroll; 
-   height:82vh;
+   height:92vh;
    z-index: 3;
    position: absolute;
    margin-top:-48px;
@@ -90,7 +93,7 @@ div.pagination a {
 }
 #dropactive{
 
-z-index: 2;
+z-index: 5;
 position: absolute;
 
 }
@@ -166,10 +169,6 @@ input{
  height: 30px;
  border-style:solid;
  background-color: #f5f5f5!important;
- 
- 
- 
-
 
 }
 
@@ -223,13 +222,24 @@ right: 10px;
     z-index: 2;
 }
 
-@media(max-width:720px){
-  #msg9{
-      margin-top:-37px;
+
+.accordion-item,.accordion-header,.accordion-button{
+  background-color:rgb(255, 213, 128)!important}
+@media(min-width:720px){
+  .mapbox-directions-inputs{
+    margin-left: 20%;
+      margin-right: -20%;
   }
+  .directions-control-instructions{
+    margin-left: 20%;
+  }
+
+  #msg9{
+
+    width: 350px;
+    height: 92vh;
 }
 
-@media(max-width:1024px){
 #menu {
     top: 22%;
     z-index: 3;
@@ -245,14 +255,11 @@ top: 20%;
 }
 }
 @media(width:320px){
-.mapboxgl-ctrl-top-right {
-    top: 136px;
-  }
+
  #menu {
     top:47%;
 }
 #dropactive{
-  top: 20%;
     right: 10px;
     z-index: 5;
 }
@@ -294,10 +301,10 @@ color:black;
  height: auto;
  border-width: 2px;
  border:solid;
- border-color:orange;
+ border-color:#e0dddd;
  color: black ;
  box-sizing: border-box;
- background-color: rgb(255, 213, 128);
+ background-color: #fff;
  
 }
 

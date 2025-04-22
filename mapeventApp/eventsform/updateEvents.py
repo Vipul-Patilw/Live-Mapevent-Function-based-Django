@@ -4,13 +4,10 @@ from mapeventApp.models import AddEvent
 from django.contrib import messages
 from django.core import paginator
 def updateEventpage(request):
-	if request.method =="POST":
-			event_id = request.POST.get('event_id')
-			updates = AddEvent.objects.filter(id=event_id).all()
-			return render(request,'updateEvent.html',{'updates': updates})
+
 	page = int(request.GET.get('page', 1))
-	allevents = AddEvent.objects.all()		
-	p = paginator.Paginator(allevents,10)
+	allevents = AddEvent.objects.all()
+	p = paginator.Paginator(allevents,9)
 	try:
 		event_page = p.page(page)
 	except paginator.EmptyPage:
@@ -18,10 +15,9 @@ def updateEventpage(request):
 	return render(request,'editevent.html',{'event_page':event_page})
 	
 
-def updateEvent(request):
+def updateEvent(request,event_id):
 		if request.method =="POST":
 			try:
-				event_id = request.POST.get('event_id')
 				event = request.POST.get('event')
 				info = request.POST.get('info')
 				eventaddress = request.POST.get('eventaddress')
@@ -29,15 +25,18 @@ def updateEvent(request):
 				todate = request.POST.get('todate')
 				fromtime = request.POST.get('fromtime')
 				totime = request.POST.get('totime')
-				locate = request.POST.get('locate')
 				icon = request.POST.get('icon')
 				eventermail = request.POST.get('eventermail')
 				city = request.POST.get('city')
 				geolocator = Nominatim(user_agent="MyApp")
-				location = geolocator.geocode(locate)
+				location = geolocator.geocode(city)
 				lang = location.longitude
 				lat = location.latitude
 				maping = AddEvent.objects.get(id=event_id)
+				maping.event=event
+				if request.FILES.get('event_poster'):
+					event_poster = request.FILES.get('event_poster')
+					maping.event_poster = event_poster
 				maping.info=info
 				maping.lang=lang
 				maping.lat=lat
@@ -50,12 +49,16 @@ def updateEvent(request):
 				maping.location=location
 				maping.eventermail=eventermail
 				maping.city=city
-				maping.locate = locate
 				maping.save()
-				messages.success(request,"events has been updated successfully")
+				messages.success(request,"event has been updated successfully")
 				return redirect('/eventeditpage')
-			except:
-				messages.error(request,"Excat location of event which you enter is invalid. please check if it don't have any spelling mistakes if it is still not working try with some official locations")
-				return redirect('/addevent')
-		return render(request,'updateEvent.html')
+			except Exception as e:
+				messages.error(request,f"error :{e}, Excat location of event which you enter is invalid. please check if it don't have any spelling mistakes if it is still not working try with some official locations")
+				context = {
+                'updates': AddEvent.objects.filter(id=event_id).all(),
+                'form_data': request.POST,  # Pass the form data back to the template
+				}
+				return render(request, 'updateEvent.html', context)
+		updates = AddEvent.objects.filter(id=event_id).all()
+		return render(request,'updateEvent.html',{'updates': updates})
 		

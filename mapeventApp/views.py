@@ -187,9 +187,8 @@ def index(request):
 			myuser.first_name = first_name
 			myuser.last_name = last_name
 			myuser.is_active = True
-			myuser.save()	
-			
-			users = Login(first_name=first_name,username=username, mobile_number=mobile_number,last_name=last_name,email=email,birthdate=birthdate,gender=gender,)
+			myuser.save()
+			users = Login(first_name=first_name,username=username, mobile_number=mobile_number,last_name=last_name,email=email,birthdate=birthdate,gender=gender,user=myuser)
 			users.save()		
 			
 			#confirmation email
@@ -324,6 +323,16 @@ def setting(request):
 	return render (request,'setting.html')
 		
 def personalDetails (request):
+	if request.user.is_anonymous:
+		return redirect('')
+	if request.method == 'POST':
+		profile_pic = request.FILES.get('profile_pic')
+		current_user = request.user
+		username = current_user.username
+		user = Login.objects.get(username=username)
+		user.profile_pic = profile_pic
+		user.save()
+		return redirect('personaldetails')
 	return render (request,'personalDetails.html')
 
 def logoutuser(request):
@@ -427,3 +436,5 @@ def reset_password_success(request):
 def staffinfo(request):
 	user = User.objects.filter(is_staff=True).all()
 	return render(request,'staffdata.html',{'users':user})
+
+ 

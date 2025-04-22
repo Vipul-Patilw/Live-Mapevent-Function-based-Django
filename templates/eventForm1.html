@@ -150,20 +150,19 @@
     
     
     
-    .content{
+    .content {
     margin: auto;
-    padding:20px;
+    padding: 20px;
     text-align: center;
-    background-color:rgb(255, 213, 128);
+    background-color: #fff;
     width: auto;
     border-style: solid;
-    border-color: grey ;
-    border-radius:5px;
-    }
+    border-color: grey;
+    border-radius: 5px;
+}
     
     
-    body{
-    background-color:rgb(255, 213, 128);}
+
     </style>  
     
     <title>Event Form</title>
@@ -183,10 +182,13 @@
      <p>sorry you can't book this event. the event is expired thanks for your valuable time you can book other events from here <a href="map">click here</a></p>
      </div>
      {% else %}
-     <div class="content" >
      <form action="eventform" method="post">
-       {% csrf_token %}
-      <br> <br>
+      {% csrf_token %}
+     <div class="row content" >
+      
+      <div class="col-md-6 text-center" >
+  <h1>Event Details</h1>
+    
     
       <div class="input-field">
       <input type="text"  name="event" value ="{{event.event}}" readonly>
@@ -198,20 +200,35 @@
       <div class="input-field">
       <input type="text"  value= "{{event.fromdate}} to {{event.todate}} {{event.fromtime}} - {{event.totime}}" name="dtime" required readonly>
       <label >Date / Time</label></div>
-      <div class="input-field">
-      <input type="text"  value= "{{user.first_name}} {{user.last_name}}" name="full_name" required >
-      <label >Full Name</label></div><div class="input-field"><input type="email"  value= "{{user.email}}" name="email" required readonly>
-        <label >Email</label></div>  <input type="email" placeholder=" email of owner" name="emailowner" value="{{event.eventermail}}" hidden>
-      <div class="input-field">
-      <input type="tel"  name="mobile_number" maxlength="10" id="tel" value ="{% for m in users %}{{m.mobile_number}}{% endfor %}">
-        <label >Mobile number</label> </div>
-      
-            <div class="input-field"><input type="date" name="date" {% if date  > event.fromdate %} min="{{date |date:'Y-m-d'}}" {% else %} min="{{event.fromdate |date:'Y-m-d'}}" {% endif %}  max="{{event.todate |date:'Y-m-d'}}" required>  <input type="time"  name="time" min="{{event.fromtime |date:'H:i'}}" max="{{event.totime |date:'H:i'}}"required>
-                <label >Date / Time {{event.fromdate |date:'Y-m-d'}} to {{event.todate |date:'Y-m-d'}} {{event.fromtime}} - {{event.totime}}</label></div> <br> <label>Payment : </label><input type="radio" value="Free" name="Free" class="gender">Free</input> <br> <br>
-  <button type="submit" class="btn btn-primary orange_button">Submit</button></a><br><br><br>
-  </form>
+   
+</div>
+<div class="col-md-6" style="
+margin-top: 10px;
+">
+  <br>
+  <div class="input-field">
+    <input type="text"  value= "{{user.first_name}} {{user.last_name}}" name="full_name" required >
+    <label >Full Name</label></div><div class="input-field"><input type="email"  value= "{{user.email}}" name="email" required readonly>
+      <label >Email</label></div>  <input type="email" placeholder=" email of owner" name="emailowner" value="{{event.eventermail}}" hidden>
+    <div class="input-field">
+    <input type="tel"  name="mobile_number" maxlength="10" id="tel" value ="{% for m in users %}{{m.mobile_number}}{% endfor %}">
+      <label >Mobile number</label> </div>
+    <div class="row">
+      <label >Date / Time {{event.fromdate |date:'Y-m-d'}} to {{event.todate |date:'Y-m-d'}} {{event.fromtime}} - {{event.totime}}</label>
+        <div class="col-6"><input type="date" name="date" {% if date  > event.fromdate %} min="{{date |date:'Y-m-d'}}" {% else %} min="{{event.fromdate |date:'Y-m-d'}}" {% endif %}  max="{{event.todate |date:'Y-m-d'}}" required> </div> <div class="col-6">
+          <input type="time"  name="time" min="{{event.fromtime |date:'H:i'}}" max="{{event.totime |date:'H:i'}}"required>
+        </div>
+       
+    </div>
+        
+              
+              <br> <label>Payment : </label><input type="radio" value="Free" name="Free" class="gender">Free</input> <br> <br>
 
 </div>
+<button type="submit" class="btn btn-primary orange_button">Submit</button></a><br><br><br>
+
+</div>
+</form>
 {% endif %}
 {% endfor %}
      

@@ -1,4 +1,4 @@
-from mapeventApp.models import AddEvent,Staff
+from mapeventApp.models import AddEvent,Staff,Login
 from geopy.geocoders import Nominatim
 from django.shortcuts import redirect,render
 from django.core import  paginator
@@ -25,14 +25,8 @@ def base(request):
 		except paginator.EmptyPage:
 			event_page2 = paginator.Page([], page2, p2)
 		if  not is_ajax(request):
-		          context = {
-            'eventbasepaging': event_page2,
-            'eventbasecount':evntsbasecount,
-            'citynameunique':citynameunique, 
-            'baselat':baselat,
-	'baselang':baselang,
-        }
-        		  return context
+			context = {'eventbasepaging': event_page2,'eventbasecount':evntsbasecount,'citynameunique':citynameunique, 'baselat':baselat,'baselang':baselang,}
+			return context
         		  	
 		else:
 			content2 = ''
@@ -92,12 +86,16 @@ def locations(request):
 	#	return render(request,'map.html',{'baselat':baselat,'baselang':baselang}
 	
 	
-	locations = AddEvent.objects.all().values_list('city', flat=True).distinct() 
-	
+	locations = AddEvent.objects.all().values_list('city', flat=True).distinct()
+	try: 
+		user_data = Login.objects.get(user=request.user)
+	except:
+		user_data = ''
 	dict = {
 	'locations':locations,
 'date':date,
-'staff':staff
+'staff':staff,
+'user_data':user_data
 }
 	return dict
 

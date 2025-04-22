@@ -47,22 +47,33 @@ color:#e91e63!important;
 background-color:#ffd7b5!important;
 word-wrap:break-word!important;
 }
-.accordion-item,.accordion-header,.accordion-button{
-background-color:rgb(255, 213, 128)!important}
+
 </style>
 <div class="accordion accordion-borderless" id="accordionFlushExample">
      <div class="accordion-item ">
      <h2 class="accordion-header" id="flush-heading{{page.id}}X">
      <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
      data-mdb-target="#flush-collapse{{page.id}}X" aria-expanded="true" aria-controls="flush-collapseOneX">
-    <div class=""> <span class="badge badge-primary amount_badge rounded-pill mx-2 p-2 my-2">{{ page.event }} </span>
+    <div class="">
+      {% if page.event_poster %}
+      <img src="http://127.0.0.1:8000/media/{{page.event_poster}}" class="img-responsive img-fluid w-100">
+     {% endif %}
+      <div class="text-center">
+        <span class="badge badge-primary amount_badge rounded-pill mx-2 p-2 my-2 text-wrap">{{ page.event }} {{page.event_poster.url|safe}}</span>
+      </div> 
    </div>
      </button>
      </h2>
      <div id="flush-collapse{{page.id}}X" class="accordion-collapse collapse "
      aria-labelledby="flush-heading{{page.id}}X" data-mdb-parent="#accordionFlushExample">
      <div class="accordion-body recharge_accordian_body">
- <strong>{{ page.event }}</strong><p>{{ page.info |slice:":255" }}..<br><br><a href="eventdetails-{{page.id}}" style ="border:none;color:orange"><strong> read more..</strong></a> <br><br><b> Address:</b><a href="locate-{{page.lat}}&{{page.lang}}" style="margin-left: 10px;"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"><u>{{ page.eventaddress }}</u></a>
+ <strong>{{ page.event }}</strong><p>{{ page.info |slice:":255" }}..<br><br><a href="eventdetails-{{page.id}}" style ="border:none;color:orange"><strong> read more..</strong></a> <br><br><b> Address</b>(locate on map):
+  <div class="row">
+    <div class="col-1"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"></div>
+  <div class="col-8">
+    <a href="#" onclick="showPopup({{ page.lat }}, {{ page.lang }}, '{{page.id}}' )" style="margin-left: 10px;" id="locat_n_map"><u>{{ page.eventaddress }}</u></a>
+  </div>
+</div>
  <br><b> Date/Time:</b>  {{ page.fromdate }} {{ page.fromtime }} to {{ page.todate }} {{ page.totime }}</p>
  <br>
  <a href="bookingform-{{page.id}}-{{user.email}}" class="btn btn-primary orange_button" >Book</a>

@@ -131,11 +131,7 @@
       bottom: 0px;
       
   }
-  .typemsg input{
-      height: 50px;
-      width: 375px;
-      
-  }
+ 
   #clr a:link{
       color:white;
       background-color: transparent;
@@ -160,15 +156,7 @@
   }
   
       
-  input{
-      width: 200px;
-      border-radius: 5px;
-      height: 25px;
-      border-style:solid;
-      border-color: whitesmoke;
-     
-     
-  }
+
   .addpic{
       width: 150px;
       height: 150px;
@@ -601,30 +589,46 @@
     {% csrf_token %}
     
 
+<div class="row" style="margin:5px">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-6">
+                <lable>First name : </lable><input class="form-control" type="text" placeholder=" enter your first name" name="first_name" required>
+            </div>
+           <div class="col-6">
+            <lable>Last name : </lable><input class="form-control" type="text" placeholder=" enter your last name" name="last_name" required>
+           </div>  
+        </div>
+  <br>
+<lable>Username : </lable><input class="form-control" type="text" placeholder=" enter username" name="username" required><br>
+<div class="row">
 
-<pre><lable>First name : </lable><input type="text" placeholder=" enter your first name" name="first_name" required>
+    <lable>Mobile number : </lable>
+    <div class="col-md-2 col-4"><input class="form-control" type="text" value="+91"  readonly ></div>
+    <div class="col-8"><input class="form-control" type="tel" placeholder=" enter mobile number" name="mobile_number" maxlength="10" id="tel"></div>
+</div>
+<br>
+<lable>Email Address : </lable><input class="form-control" type="email" placeholder=" enter email address" name="email" required>
+    <br>
 
-<lable>Last name : </lable><input type="text" placeholder=" enter your last name" name="last_name" required>
+    </div>
 
-<lable>Username : </lable><input type="text" placeholder=" enter username" name="username" required>
+   <div class="col-md-6">
+    
+    <lable>Enter Password : </lable><input class="form-control" type="password" placeholder=" enter Password" name="password" required><br>
 
-<lable>Mobile number : </lable><input type="tel" value="+91" style="width:35px; margin-right:5px" readonly ><input type="tel" placeholder=" enter mobile number" name="mobile_number" maxlength="10" id="tel">
+<lable>Re-enter Password : </lable><input class="form-control"type="password" placeholder=" confirm your Password" name="password2" required><br>
 
-<lable>Email Address : </lable><input type="email" placeholder=" enter email address" name="email" required>
-   
-<lable>Enter Password : </lable><input type="password" placeholder=" enter Password" name="password" required>
+<lable>Gender : </lable><input type="radio" id="male" value="male" name="gender" class="gender"><label for="male">Male</label> <input  type="radio" value="female" name="gender" id="female" class="gender"><label for="female">Female</label></br><br>
+<div class="col-md-4 mt-2">
+    <lable>Birth date : </lable><input class="form-control" type="date" placeholder=" date of birth" class="birth" name="birthdate" min="1930-01-01" max="2010-12-31">
+</div>
 
-<lable>Re-enter Password : </lable><input type="password" placeholder=" confirm your Password" name="password2" required>
-
-<lable>Gender : </lable><input type="radio" value="male" name="gender" class="gender">male</input> <input type="radio" value="female" name="gender" class="gender">female</input></b>
-
-<lable>Birth date : </lable><input type="date" placeholder=" date of birth" class="birth" name="birthdate" min="1930-01-01" max="2010-12-31"><br><br>
-</pre></b>
-
+   </div>
 
 </div>
 
-        <br></pre>
+        <br>
        
          <div class="button"><button type="submit" class="btn btn-primary orange_button">SUBMIT</button></a><br><br><br><br></div>
         

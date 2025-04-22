@@ -16,11 +16,11 @@
 {% endif %}
 </div>
 <div id="dropactive">
-<a href="#" class="btn btn-primary orange_button text-center" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="height:30px; width:30px;padding:0px;padding-top:4px"><i class="fas fa-solid fa-circle" style="color:green;font-size:15px"></i></a></div><br><br>
- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<a href="#" class="btn btn-primary orange_button text-center" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="height:30px; width:30px;padding:0px;padding-top:4px;margin-top: 160%"><i class="fas fa-solid fa-close  " style="color:green;font-size:15px" id="drop_icon"></i></a></div><br><br>
+ <div class="collapse navbar-collapse show" id="navbarSupportedContent">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
    
- <div  id="msg9">
+ <div  id="msg9" class="border rounded p-3 shadow-lg shadow-inset">
 <!-- <form method ="post" >
  {% csrf_token %}
  <input name="street" type="hidden" value="streets-v11" >
@@ -35,14 +35,13 @@
   <div id="msg_wrapper">
     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
     <h3 id="msg_heading">Active Events In {% for page in citynameunique %}{{page.title}}{% endfor %} ({{ eventbasecount.count }})</h3><br>
+   
   </div>
 
-
-
+ 
 <div class="infinite-container">
 
-
-
+ 
 <div class="accordion accordion-borderless infinite-item" id="accordionFlushExample">
 <!--  <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
    {% for page in eventbasepaging  %}
@@ -62,8 +61,24 @@
  {% else %}
  <div id="msg_wrapper">
  <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
- <h3 id="msg_heading">Active Events In India ({{ mapings.count }}) </h3><br>
+ <h3 id="msg_heading">Active Events In GMVIT ({{ mapings.count }}) </h3><br>
+ 
  </div>
+ <div class="input-group w-auto my-auto d-flex">
+    <input
+    autocomplete="off"
+    type="search"
+    class="form-control rounded"
+    placeholder="Search Event"
+    name="search"
+    
+    style="min-width: 125px; height:50px;"
+    required />
+    <span class="input-group-text border-0  d-flex"
+   style="background-color:orange; height:50px" > <button type="submit" style="background-color:orange;border:none"><i class="fas fa-search"></i
+    ></button></span>
+   </div> 
+   <br>
  <div class="infinite-container">
 
  
@@ -99,22 +114,22 @@
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
     </style>
-   <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
- 
+ <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+ <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+ <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+ <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
    
  
     <div style="float:right;" id="map"></div>
+<!-- Your HTML code here -->
 
-    <script>
-      
-        mapboxgl.accessToken = 'pk.eyJ1IjoicGF0aWx2aXB1bCIsImEiOiJjbDNsdGloMmYwY3c2M2tsNDA3aGwwd2xpIn0.aOLTH7E6WHyN97Yd6eLgPA';
-    const map = new mapboxgl.Map({
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoicGF0aWx2aXB1bCIsImEiOiJjbDNsdGloMmYwY3c2M2tsNDA3aGwwd2xpIn0.aOLTH7E6WHyN97Yd6eLgPA';
+  const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
-     antialias: true,
+    antialias: true,
     {% if lat %}
-    
     center: [{{lang}}, {{lat}}]
     {% elif baselat %}
     center: [{{baselang}}, {{baselat}}]
@@ -122,126 +137,265 @@
     center: [78.9629, 20.5937]
     {% endif %}
     ,
-
     zoom: 11.15
+});
+
+// Create a single popup for all events
+const popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
+
+// Create an array to store all markers
+const markers = [];
+
+map.on('load', () => {
+    const geolocateControl = new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true,
+            },
+            trackUserLocation: true, // Set to false initially to prevent continuous tracking
+            showUserHeading: true,
+        });
+
+        map.addControl(geolocateControl);
+    map.addSource('directions', {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': []
+            }
+        }
     });
-     
-    map.on('load', () => {
-    
-    
-    map.addSource('places', {
-    // This GeoJSON contains features that include an "icon"
-    // property. The value of the "icon" property corresponds
-    // to an image in the Mapbox Streets style's sprite.
-    'type': 'geojson',
-    'data': {
-    'type': 'FeatureCollection',
-    'features': [
- 
-    {% for maping in mapings %}
-    {
-    
-      'type': 'Feature',
-      'properties': {
-      'description': '<strong>{{ maping.event }}</strong><p> {{ maping.info |slice:":255" }}<br><br><a href="eventdetails-{{maping.id}}" style ="border:none;color:grey"><strong> read more..</strong></a> <br><br><b> Address:</b> {{ maping.eventaddress }} <br><b> Date/Time:</b> {{ maping.fromdate }} {{ maping.fromtime }} to {{ maping.todate }} {{ maping.totime }}</p><a href ="bookingform-{{maping.id}}-{{user.email}}"  class="btn btn-primary orange_button">Book</a>',
-      
-      'icon': '{{maping.icon}}'
-    
+
+    // Add a layer for the Mapbox Directions plugin
+    map.addLayer({
+        'id': 'directions',
+        'type': 'line',
+        'source': 'directions',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#007cbf',
+            'line-width': 5
+        }
+    });
+    const directionsControl = new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    unit: 'metric',
+    profile: 'mapbox/bike', // You can change the profile for driving, walking, etc.
+    controls: {
+      inputs: true, // Hide inputs for start and destination, we will set them dynamically
     },
-      'geometry': {
-      'type': 'Point',
-      
-      'coordinates':  [{{ maping.lang }}, {{ maping.lat }}]    
-      
-     
-      }
-     
-      },
-      {% endfor %}
+  });
+// Add a source for the Mapbox Directions plugin
 
-   
-    ]
-
-    }
+  // Add the directions control to the map
+  map.addControl(directionsControl, 'top-left');
+  
+    map.addSource('places', {
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': [
+                {% for maping in mapings %}
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'event_id': '{{ maping.id }}',
+                        'description': ' {% if maping.event_poster %}<img src="http://127.0.0.1:8000/media/{{maping.event_poster}}" class="img-responsive img-fluid w-100"><br>{% endif %}<strong>{{ maping.event }}</strong><p> {{ maping.info |slice:":255" }}<br><br><a href="eventdetails-{{maping.id}}" style ="border:none;color:grey"><strong> read more..</strong></a> <br><br><b> Address:</b> {{ maping.eventaddress }} <br><b> Date/Time:</b> {{ maping.fromdate }} {{ maping.fromtime }} to {{ maping.todate }} {{ maping.totime }}</p><a href ="bookingform-{{maping.id}}-{{user.email}}"  class="btn btn-primary orange_button">Book</a>',
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [{{ maping.lang }}, {{ maping.lat }}]
+                    }
+                },
+                {% endfor %}
+            ]
+        }
     });
-    
+
     // Add a layer showing the places.
-    map.addLayer(
-    {
-    'id': 'places',
-    'type': 'symbol',
-    'source': 'places',
-    'layout': {
-    'icon-image': '{icon}',
-    'icon-allow-overlap': true
-    }
+    map.addLayer({
+        'id': 'places',
+        'type': 'symbol',
+        'source': 'places',
+        'layout': {
+            'icon-allow-overlap': true
+        }
     });
-     
-    // When a click event occurs on a feature in the places layer, open a popup at the
-    // location of the feature, with description HTML from its properties.
-  /*  {% if lat %}
-     const description = e.features[0].properties.description;
-     new mapboxgl.Popup()
-    .setLngLat([{{lang}},{{lat}}])
-    .setHTML(description)
-    .addTo(map);
-    {% endif %}*/
-    map.on('click', 'places', (e) => {
-    // Copy coordinates array.
-    const coordinates = e.features[0].geometry.coordinates.slice();
-    const description = e.features[0].properties.description;
-     
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-     
-    new mapboxgl.Popup()
-    .setLngLat(coordinates)
-    .setHTML(description)
-    .addTo(map);
+
+    // Show a popup for each event when the map loads
+    {% for maping in mapings %}
+    map.getSource('places')._data.features.forEach(feature => {
+   
+        const coordinates = feature.geometry.coordinates.slice();
+      
+        const description = feature.properties.description.replace('{{maping.id}}', feature.properties.event_id);
+
+        const marker = new mapboxgl.Marker()
+            .setLngLat(coordinates)
+            .addTo(map);
+
+        // Set the marker's popup content
+        marker.setPopup(new mapboxgl.Popup().setHTML(description));
+        const eventId = feature.properties.event_id;
+        marker.getElement().setAttribute('data-event-id', eventId);
+    // Inside the 'forEach' loop where you create the markers, update the 'description' variable
+        
+
+        // Store markers in the array
+        markers.push(marker);
+
     });
-     
+    {% endfor %}
+
+    // Function to reopen closed popup when clicking on a marker
+    function openPopup(marker) {
+        const popup = marker.getPopup();
+        if (popup) {
+            if (!popup.isOpen()) {
+                popup.addTo(map);
+            }
+        }
+    }
+
+    // Event listener to reopen popup on marker click
+    markers.forEach(marker => {
+        marker.getElement().addEventListener('click', () => {
+            openPopup(marker);
+        });
+    });
+
+    // Show all popups by default
+    markers.forEach(marker => {
+        openPopup(marker);
+    }
+    );
+
     // Change the cursor to a pointer when the mouse is over the places layer.
     map.on('mouseenter', 'places', () => {
-    map.getCanvas().style.cursor = 'pointer';
+        map.getCanvas().style.cursor = 'pointer';
     });
-     
+
     // Change it back to a pointer when it leaves.
     map.on('mouseleave', 'places', () => {
-    map.getCanvas().style.cursor = '';
+        map.getCanvas().style.cursor = '';
     });
-    });
-    map.addControl(
-    new mapboxgl.GeolocateControl({
-    positionOptions: {
-    enableHighAccuracy: true
-    },
-    // When active the map will receive updates to the device's location as it changes.
-    trackUserLocation: true,
-    // Draw an arrow next to the location dot to indicate which direction the device is heading.
-    showUserHeading: true
-    })
-    );
-   const layerList = document.getElementById('menu');
-   const inputs = layerList.getElementsByTagName('input');
-   //console.log(inputs);
-   for (const input of inputs) {
-   input.onclick = (layer) => {
-   const layerId = layer.target.id;
-  map.setStyle('mapbox://styles/mapbox/' + layerId);
-    
-  };
-    }
-    map.addControl(
-    new MapboxDirections({
-    accessToken: mapboxgl.accessToken
-    }),
-    'top-left'
-    );
 
+});
+
+function showPopup(lat, lang, eventId) {
+  
+    // Convert latitude and longitude to a mapboxgl.LngLat object
+    const coordinates = new mapboxgl.LngLat(lang, lat);
+
+    // Find the corresponding marker for the event
+    const marker = markers.find(m => m.getElement().dataset.eventId === eventId);
+
+    if (marker) {
+        // Open the marker's popup
+        marker.getPopup().addTo(map);
+
+        // Center the map on the popup's coordinates
+        map.flyTo({ center: coordinates });
+
+        // Set start location to user's current location
+        const directionsControl = new MapboxDirections({
+            accessToken: mapboxgl.accessToken,
+            unit: 'metric',
+            profile: 'mapbox/driving', // You can change the profile for driving, walking, etc.
+            controls: {
+                inputs: false, // Hide inputs for start and destination, we will set them dynamically
+            },
+        });
+
+        // map.addControl(directionsControl, 'top-left');
+
+        // Update the route and ETA on every user location change
+        let userLocationMarker;
+        let intervalId;
+
+        function updateUserLocation(position) {
+            const startLocation = [position.coords.longitude, position.coords.latitude];
+            const destinationLocation = [lang, lat];
+
+            // Update the start and destination inputs in the Directions control
+            directionsControl.setOrigin(startLocation);
+            directionsControl.setDestination(destinationLocation);
+
+            // Fetch route information from the Directions API
+            fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${startLocation[0]},${startLocation[1]};${destinationLocation[0]},${destinationLocation[1]}?access_token=${mapboxgl.accessToken}`)
+                .then(response => response.json())
+                .then(data => {
+                    const route = data.routes[0];
+                    if (route && route.duration) {
+                        // Update the displayed ETA on the map
+                        const durationInMinutes = Math.ceil(route.duration / 60);
+                        const popupContent = `ETA: ${durationInMinutes} minutes`;
+                        marker.getPopup().setHTML(popupContent);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching route information:', error);
+                });
+        }
+
+        // Start tracking the user's location and updating the route and ETA
+        if (navigator.geolocation) {
+            intervalId = setInterval(() => {
+                navigator.geolocation.getCurrentPosition(
+                    updateUserLocation,
+                    error => {
+                        console.error('Error getting current location:', error);
+                    },
+                    { enableHighAccuracy: true }
+                );
+            }, 5000); // Update the location every 5 seconds (adjust as needed)
+        }
+
+        // Stop tracking and updating when the popup is closed
+        marker.getPopup().on('close', () => {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+        });
+    }
+    
+}
+
+
+// map.addControl(
+//     new mapboxgl.GeolocateControl({
+//         positionOptions: {
+//             enableHighAccuracy: true
+//         },
+//         // When active the map will receive updates to the device's location as it changes.
+//         trackUserLocation: true,
+//         // Draw an arrow next to the location dot to indicate which direction the device is heading.
+//         showUserHeading: true
+//     })
+// );
+
+const layerList = document.getElementById('menu');
+const inputs = layerList.getElementsByTagName('input');
+for (const input of inputs) {
+    input.onclick = (layer) => {
+        const layerId = layer.target.id;
+        map.setStyle('mapbox://styles/mapbox/' + layerId);
+    };
+}
+
+
+</script>
+
+ 
+    <script>
      $(document).ready(function () {
             window.news_index = "{% url 'map' %}";
             console.log(page)

@@ -16,10 +16,11 @@ def addevent(request):
 				eventermail = request.POST.get('eventermail')
 				city = request.POST.get('city')
 				geolocator = Nominatim(user_agent="MyApp")
-				location = geolocator.geocode(eventaddress)
+				location = geolocator.geocode(city)
 				lang = location.longitude
 				lat = location.latitude
-				maping = AddEvent(event=event,info=info,lang=lang,lat=lat,eventaddress=eventaddress,fromdate=fromdate,fromtime=fromtime,todate=todate,totime=totime,icon=icon, location=location,eventermail=eventermail,city=city)
+				event_poster = request.FILES.get('event_poster')
+				maping = AddEvent(event=event,info=info,lang=lang,lat=lat,eventaddress=eventaddress,fromdate=fromdate,fromtime=fromtime,todate=todate,totime=totime,icon=icon, location=location,eventermail=eventermail,city=city,event_poster=event_poster)
 				maping.save()
 				return  redirect('/map')
 		except:

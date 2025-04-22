@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -23,156 +24,148 @@
    
     <style>
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    font-family: "Montserrat", sans-serif;
-    }
-    #color1 {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+      font-family: "Montserrat", sans-serif;
+  }
+  #color1 {
     font-family:Magneto;
-    }
-    .navbar {
-    background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));}
-    .orange_button:focus{
-    border-color: orange!important;
-    box-shadow: 0 0 0 0.25rem rgb(255, 213, 128)!important;
+  }
+  .navbar {
+  background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));}
+  .orange_button:focus{
+  border-color: orange!important;
+  box-shadow: 0 0 0 0.25rem rgb(255, 213, 128)!important;
+  
+  }
+  .orange_button{
+  background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  }
+  a:link{
+      color:black;
+      background-color: transparent;
+      text-decoration:none;
+  }
+  
+  a:visited{
+      color:black;
+      background-color: transparent;
+      text-decoration: none;
+  }
+  .button{
+      text-align: center;}
+  a:hover{
+      color:rgb(53, 53, 53);
+      background-color: transparent;
+      text-decoration:none;
+  }
+  .background_color{
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-color:#1b1e23;
+  }
+  .nav{
+      margin: 0;
+      padding: 15px;
+     background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));;
+  }
+  
+  .nav img{
+      width: 25px;
+      border-radius: 13px;
+      margin-right: 10px;
+      float: left;
+  }
+ 
+  
+      
+  input{
+      width: 200px;
+      border-radius: 5px;
+      height: 25px;
+      border-style:solid;
+      background-color:rgb(255, 213, 128);
+     
+     
+  }
+ 
+  input:focus, input:hover {
+        outline:none;
+        border: 1px solid green;
+  } 
+  .birth{
+      width: 200px;
+      border-radius: 5px;
+      height: 25px;
+      background-color:rgb(255, 213, 128);
+      }
+  .gender{
+      height: 15px;
+      border-style: none;
+      width:auto;
+      margin:20px;
+      
+  }
+  button{
+      border-radius: 5px;
+      
+  }
+  select{
+      width: 200px;
+      border-radius: 5px;
+      height: 37px;
+      background-color:rgb(255, 213, 128);
+      display: block;
+      border-color:grey
+  }
+  select:focus, select:hover {
+        outline:none;
+        border: 1px solid orange;
+  } 
+ 
+  
+  .privacy_policy{
+       background-color:rgb(255, 213, 128);
+      margin: 10px;
+      padding:10px;
+      height: fit-content;
+      border:solid;
+      
+  }
+  .privacy_policy input{
+      margin: 5px;
+      padding: 0px;
+      height: 12px;
+  }
+  
+  
+  .content{
+      margin: auto;
+      padding:20px;
+      text-align: center;
+      background-color:#fff;
+      width: auto;
+      border-style: solid;
+      border-color: grey ;
+      border-radius:5px;
+  }
+  
+  
+
+</style>  
     
-    }
-    .orange_button{
-    background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #333;
-    }
-    a:link{
-    color:black;
-    background-color: transparent;
-    text-decoration:none;
-    }
-    
-    a:visited{
-    color:black;
-    background-color: transparent;
-    text-decoration: none;
-    }
-    .button{
-    text-align: center;}
-    a:hover{
-    color:rgb(53, 53, 53);
-    background-color: transparent;
-    text-decoration:none;
-    }
-    .background_color{
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    background-color:#1b1e23;
-    }
-    .nav{
-    margin: 0;
-    padding: 15px;
-    background-image: linear-gradient(to top left, orange, rgb(255, 213, 128));;
-    }
-    
-    .nav img{
-    width: 25px;
-    border-radius: 13px;
-    margin-right: 10px;
-    float: left;
-    }
-    
-    
-    
-    input{
-    width: 200px;
-    border-radius: 5px;
-    height: 25px;
-    border-style:solid;
-    background-color:rgb(255, 213, 128);
-    
-    
-    }
-    
-    input:focus, input:hover {
-    outline:none;
-    border: 1px solid green;
-    } 
-    .birth{
-    width: 200px;
-    border-radius: 5px;
-    height: 25px;
-    background-color:rgb(255, 213, 128);
-    }
-    .gender{
-    height: 15px;
-    border-style: none;
-    width:auto;
-    margin:20px;
-    
-    }
-    button{
-    border-radius: 5px;
-    
-    }
-    select{
-    width: 200px;
-    border-radius: 5px;
-    height: 37px;
-    background-color:rgb(255, 213, 128);
-    display: block;
-    border-color:grey
-    }
-    select:focus, select:hover {
-    outline:none;
-    border: 1px solid orange;
-    } 
-    
-    select option {
-    background-color:rgb(255, 213, 128);
-    }
-    
-    .privacy_policy{
-    background-color:rgb(255, 213, 128);
-    margin: 10px;
-    padding:10px;
-    height: fit-content;
-    border:solid;
-    
-    }
-    .privacy_policy input{
-    margin: 5px;
-    padding: 0px;
-    height: 12px;
-    }
-    
-    
-    
-    
-    
-    
-    .content{
-    margin: auto;
-    padding:20px;
-    text-align: center;
-    background-color:rgb(255, 213, 128);
-    width: auto;
-    border-style: solid;
-    border-color: grey ;
-    border-radius:5px;
-    }
-    
-    
-    body{
-    background-color:rgb(255, 213, 128);}
-    </style>  
-    
-    <title>Update Event Form</title>
+    <title>Event Form</title>
 </head>
 <body>
     <nav  class="navbar navbar-dark bg-dark"  aria-expanded="false" >
         <div class="container-fluid">
-        <a class="navbar-brand" href="eventeditpage" id ="color1"><i class="fa-solid fa-arrow-left" style="color:black"></i></a>
+        <a class="navbar-brand" href="{% url 'alleventedit' %}" id ="color1"><i class="fas fa-solid fa-arrow-left" style="color:black"></i></a>
         </div>
         </nav>
    
@@ -185,93 +178,116 @@
      </div>
      {% endfor %}
      {% endif %}
-     <div class="content" >
-     {% for update in updates %}
-     <form action ="editevents" method="post" class="row">
-       {% csrf_token %}
-      <br> <br>
-      <input type="text"  value ="{{update.id}}" name="event_id" hidden>
-      <div class="col-md-6">
-      <div class="input-field">
-      <input type="text"  name="event" value ="{{update.event}}" >
-      <label >Event</label></div></div>
-     <div class="col-md-6"> 
-      <div class="input-field">
-        <input type="text"  name="info" value ="{{update.info}}">
-        <label >Event info</label></div>
-      </div>
-      <div class="col-md-6">  
-        <div class="input-field">
-            <input type="text"  name="eventaddress" value ="{{update.eventaddress}}">
-            <label >Event Address</label></div>
-            </div>
-           <div class="col-md-6"> 
-            <div class="input-field">
-            <input type="text"  name="eventermail" value ="{{update.eventermail}}">
-            <label >Event Owner Email Id</label></div>
-            </div>
-          <div class="col-md-6">  
-            <div class="input-field">
-                <input type="date"  name="fromdate" value="{{update.fromdate |date:'Y-m-d'}}">
-                <label >Date From</label></div>
-                </div>
-                <div class="col-md-6">
-                <div class="input-field">
-                <input type="date"  name="todate" value ="{{update.todate |date:'Y-m-d'}}">
-                <label >Date Till</label></div>
-                </div>
-                <div class="col-md-6">
-                <div class="input-field">
-                    <input type="time"  name="fromtime" value="{{update.fromtime |date:'H:i'}}">
-                <label >Time From</label></div>
-             </div>   
-                <div class="col-md-6">
-                <div class="input-field">
-                    <input type="time"  name="totime" value="{{update.totime |date:'H:i'}}">
-                <label >Time Till</label></div>
-      </div>
-      <div class="col-md-6 mb-5">
-      <label for="icon">Choose a City:</label>
-      <select name="city" id="city">
-      <option value="{{update.city}}"selected disable hidden >{{update.city}}</option>
-      <option value="Pune"> Pune
-      </option>
-      <option value="Chennai"> Chennai  </option>
-      
-      <option value="Mumbai">Mumbai</option>
-      
-      <option value="Delhi"> Delhi</option>
-      
-      <option value="Bangalore"> Bangalore
-      </option>
-      
-      <option value="Hyderabad"> Hyderabad
-      </option>
-      <option value="Ahmedabad"> Ahmedabad
-      </option>
-      <option value="Jaipur"> Jaipur
-      </option>
-      <option value="Kolkata">Kolkata
-      </option>
-      </select>
-      </div>
-   <div class="col-md-6 mb-5">
- <label for="icon">Choose an Icon:</label>
-    <select name="icon" id="icon" >
-  <option value="{{update.icon}}"selected disable hidden >{{update.icon}}</option>
-  <option value="bar-15">bar-15</option>
-  <option value="music-15">music-15</option>
-  <option value="art-gallery-15">art-gallery-15</option>
-  </select>
- 
-</div>
-
-
-<br><br>
-      <button type="submit" class="btn btn-primary orange_button">Submit</button><br><br><br>
-  </form>
-  {% endfor %}
-</div>
      
+     <div class="content" >
+      {% for update in updates %}
+     <form action ="{% url 'editevents' event_id=update.id %}" method="post" enctype="multipart/form-data" data-ajax="false">
+       {% csrf_token %}
+       <input type="text"  value ="{{update.id}}" name="event_id" hidden>
+      <br> <br>
+      <div class="row">
+        <div class="col-md-6">
+        
+                        <div class="input-field">
+                        <input type="text"  name="event" value="{{update.event}}">
+                        <label >Event</label></div>
+                    
+                        <div class="input-field">
+        <input type="text"  name="info" value ="{{update.info}}">
+                        <label >Event info</label></div>
+                        
+                        <div class="input-field">
+                            <input type="text"  name="eventaddress" value ="{{update.eventaddress}}">
+                            <label >Event Address</label></div>
+                            
+                            
+                            <div class="input-field">
+                            <input type="text"  name="eventermail" value ="{{update.eventermail}}">
+                            <label >Event Owner Email Id</label></div>
+                            <div class="row">
+                                <div class="input-field col-6">
+                                    <input type="date"  name="fromdate" value="{{update.fromdate |date:'Y-m-d'}}">
+                                    <label >Date From</label></div>
+                                    <div class="input-field col-6">
+                                        <input type="date"  name="todate" value ="{{update.todate |date:'Y-m-d'}}">
+                                        <label >Date Till</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col-6">
+                                    <input type="time"  name="fromtime" value="{{update.fromtime |date:'H:i'}}">
+                                <label >Time From</label></div>
+                            
+                                <div class="input-field col-6">
+                                    <input type="time"  name="totime" value="{{update.totime |date:'H:i'}}">
+                                <label >Time Till</label></div>
+                            </div>
+                                     
+                                  
+                          
+        </div>
+        <div class="col-md-6">
+            <label for="event_poster" class="text-center"><img id="poster_output" src="{% if update.event_poster %}{{update.event_poster.url}}{% else %}{% static 'default_poster.jpg' %}{% endif %}" alt="avatar"
+                class="img-fluid" style="width: 260px;height:260px">
+        <div> Add Event Poster</div>
+               
+              </label>
+              <input type="file" name="event_poster" id="event_poster"  style="display:none;" accept="image/*"  >
+              
+                    <br><br>
+                        <label for="icon">Choose a City:</label>
+                        <div class="input-field d-flex justify-content-center">
+                            <select name="city" id="city" class="form-select">
+                              <option value="{{update.city}}"selected disable hidden >{{update.city}}</option>
+                              <option value="Raigad, Tala"> Tala
+                            </option> 
+                              <option value="Pune"> Pune
+                                </option>
+                                <option value="Chennai"> Chennai  </option>
+                                
+                                <option value="Mumbai">Mumbai</option>
+                                
+                                <option value="Delhi"> Delhi</option>
+                                
+                                <option value="Bangalore"> Bangalore
+                                </option>
+                                
+                                <option value="Hyderabad"> Hyderabad
+                                </option>
+                                <option value="Ahmedabad"> Ahmedabad
+                                </option>
+                                <option value="Jaipur"> Jaipur
+                                </option>
+                                <option value="Kolkata">Kolkata
+                                </option>
+                                </select>
+                        </div>
+                       
+                    
+                <label for="icon" >Choose an Icon:</label>
+                <div class="input-field d-flex justify-content-center">  
+                    <select name="icon" id="icon" class="form-select">
+                      <option value="{{update.icon}}"selected disable hidden >{{update.icon}}</option>
+                    <option value="bar-15">bar-15</option>
+                    <option value="music-15">music-15</option>
+                    <option value="art-gallery-15">art-gallery-15</option>
+                    </select>
+       </div>
+      </div>
+            <button type="submit" class="btn btn-primary orange_button">Submit</button></a><br><br>
+        </form>
+        {% endfor %}
+      </div>
+      
+</div>
+<script>
+    let loadPoster = document.getElementById("event_poster");
+     loadPoster.onchange = function() {
+     
+      var poster = document.getElementById('poster_output');
+    poster.src = URL.createObjectURL(event.target.files[0]);
+
+      };
+      
+    </script>    
 </body>
 </html>

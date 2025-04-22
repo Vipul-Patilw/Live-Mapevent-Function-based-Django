@@ -127,10 +127,7 @@
         outline:none;
         border: 1px solid orange;
   } 
-  
-  select option {
-      background-color:rgb(255, 213, 128);
-      }
+ 
   
   .privacy_policy{
        background-color:rgb(255, 213, 128);
@@ -146,16 +143,12 @@
       height: 12px;
   }
   
-
-      
-      
-  
   
   .content{
       margin: auto;
       padding:20px;
       text-align: center;
-      background-color:rgb(255, 213, 128);
+      background-color:#fff;
       width: auto;
       border-style: solid;
       border-color: grey ;
@@ -163,8 +156,7 @@
   }
   
   
-  body{
-   background-color:rgb(255, 213, 128);}
+
 </style>  
     
     <title>Event Form</title>
@@ -185,92 +177,111 @@
      </div>
      {% endfor %}
      {% endif %}
+     
      <div class="content" >
-      
-     <form method="post" class="row">
+     <form method="post" enctype="multipart/form-data" data-ajax="false">
        {% csrf_token %}
       <br> <br>
-      <div class="col-md-6">
-      <div class="input-field">
-      <input type="text"  name="event" >
-      <label >Event</label></div>
-      </div>
-      <div class="col-md-6">
-      <div class="input-field">
-        <input type="text"  name="info">
-        <label >Event info</label></div>
+      <div class="row">
+        <div class="col-md-6">
+        
+                        <div class="input-field">
+                        <input type="text"  name="event" >
+                        <label >Event</label></div>
+                    
+                        <div class="input-field">
+                        <input type="text"  name="info">
+                        <label >Event info</label></div>
+                        
+                        <div class="input-field">
+                            <input type="text"  name="eventaddress">
+                            <label >Event Address</label></div>
+                            
+                            
+                            <div class="input-field">
+                            <input type="text"  name="eventermail">
+                            <label >Event Owner Email Id</label></div>
+                            <div class="row">
+                                <div class="input-field col-6">
+                                    <input type="date"  name="fromdate">
+                                    <label >Date From</label></div>
+                                    <div class="input-field col-6">
+                                        <input type="date"  name="todate">
+                                        <label >Date Till</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col-6">
+                                    <input type="time"  name="fromtime">
+                                <label >Time From</label></div>
+                            
+                                <div class="input-field col-6">
+                                    <input type="time"  name="totime">
+                                <label >Time Till</label></div>
+                            </div>
+                                     
+                                  
+                          
         </div>
         <div class="col-md-6">
-        <div class="input-field">
-            <input type="text"  name="eventaddress">
-            <label >Event Address</label></div>
-            </div>
-            <div class="col-md-6">
-            
-            <div class="input-field">
-            <input type="text"  name="eventermail">
-            <label >Event Owner Email Id</label></div>
-            </div>
-            <div class="col-md-6">
-            <div class="input-field">
-                <input type="date"  name="fromdate">
-                <label >Date From</label></div>
-               </div> 
-             <div class="col-md-6">   
-                <div class="input-field">
-                <input type="date"  name="todate">
-                <label >Date Till</label></div>
-             </div>   
-            <div class="col-md-6">    
-                <div class="input-field">
-                    <input type="time"  name="fromtime">
-                <label >Time From</label></div>
-             </div>
-             <div class="col-md-6">   
-                <div class="input-field">
-                    <input type="time"  name="totime">
-                <label >Time Till</label></div>
+            <label for="event_poster" class="text-center"><img id="poster_output" src="{% if user_data.profile_pic %}{{user_data.profile_pic.url}}{% else %}{% static 'default_poster.jpg' %}{% endif %}" alt="avatar"
+                class="img-fluid" style="width: 260px;height:260px">
+        <div> Add Event Poster</div>
+               
+              </label>
+              <input type="file" name="event_poster" id="event_poster"  style="display:none;" accept="image/*" required >
+              
+                    <br><br>
+                        <label for="icon">Choose a City:</label>
+                        <div class="input-field d-flex justify-content-center">
+                            <select name="city" id="city" class="form-select">
+                                <option value="Raigad, Tala"> Tala
+                                </option>
+                                <option value="Pune"> Pune
+                                </option>
+                                <option value="Chennai"> Chennai  </option>
+                                
+                                <option value="Mumbai">Mumbai</option>
+                                
+                                <option value="Delhi"> Delhi</option>
+                                
+                                <option value="Bangalore"> Bangalore
+                                </option>
+                                
+                                <option value="Hyderabad"> Hyderabad
+                                </option>
+                                <option value="Ahmedabad"> Ahmedabad
+                                </option>
+                                <option value="Jaipur"> Jaipur
+                                </option>
+                                <option value="Kolkata">Kolkata
+                                </option>
+                                </select>
+                        </div>
+                       
+                    
+                <label for="icon" >Choose an Icon:</label>
+                <div class="input-field d-flex justify-content-center">  
+                    <select name="icon" id="icon" class="form-select">
+                    <option value="bar-15">bar-15</option>
+                    <option value="music-15">music-15</option>
+                    <option value="art-gallery-15">art-gallery-15</option>
+                    </select>
+       </div>
       </div>
-      <div class="col-md-6 mb-5 text-center">
-      <label for="icon">Choose a City:</label>
-      <select name="city" id="city">
-      <option value="Pune"> Pune
-      </option>
-      <option value="Chennai"> Chennai  </option>
-      
-      <option value="Mumbai">Mumbai</option>
-      
-      <option value="Delhi"> Delhi</option>
-      
-      <option value="Bangalore"> Bangalore
-      </option>
-      
-      <option value="Hyderabad"> Hyderabad
-      </option>
-      <option value="Ahmedabad"> Ahmedabad
-      </option>
-      <option value="Jaipur"> Jaipur
-      </option>
-      <option value="Kolkata">Kolkata
-      </option>
-      </select>
+            <button type="submit" class="btn btn-primary orange_button">Submit</button></a><br><br>
+        </form>
       </div>
-      <div class="col-md-6 mb-5 text-left">
- <label for="icon" >Choose an Icon:</label>
-  
-    <select name="icon" id="icon">
-  <option value="bar-15">bar-15</option>
-  <option value="music-15">music-15</option>
-  <option value="art-gallery-15">art-gallery-15</option>
-  </select>
- 
+      
 </div>
-
-
-
-      <button type="submit" class="btn btn-primary orange_button">Submit</button></a><br><br>
-  </form>
-</div>
+<script>
+    let loadPoster = document.getElementById("event_poster");
+     loadPoster.onchange = function() {
      
+      var poster = document.getElementById('poster_output');
+    poster.src = URL.createObjectURL(event.target.files[0]);
+
+      };
+      
+    </script>    
 </body>
 </html>

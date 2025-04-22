@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %} 
+{% load static %}
 {% if messages %}
 {% for message in messages %}
  <div class="alert alert-success  alert-dismissible fade show my-0" role="alert"><img src="https://www.pinclipart.com/picdir/big/131-1310444_check-sign-23-buy-clip-art-check-mark.png" style="height=20px; width:20px; "><strong> {{ message }} !!</strong> 
@@ -8,18 +9,55 @@
 {% endfor %}
 {% endif %}
 <br>
+<section >
+    <div class="container py-2 main_card">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="">Home</a></li>
+   
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+  
+      <div class="row justify-content-center">
+    
+        <div class="col-lg-4">
+          <div class="card mb-4">
+          <form method="post" enctype="multipart/form-data" data-ajax="false" >
+            {% csrf_token %}
+            <div class="card-body text-center">
+              <label for="profile" class="text-center"><img id="profile_output" src="{% if user_data.profile_pic %}{{user_data.profile_pic.url}}{% else %}{% static 'user_profile.png' %}{% endif %}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 160px;height:160px">
+              <div class="plus_icon text-center">
+              <i class="fas fa-solid fa-pen-to-square fa-lg" style="color: orange;    margin-left: 80%;"></i></div>
+              </label>
+              <input type="file" name="profile_pic" id="profile"  style="display:none;" accept="image/*" required >
+              
+   
+              <h5 class="my-3">{{user.username}}</h5>
+               <p class="text-muted mb-1">Last Login: {{user.last_login}} (IST)</p>
+              <p class="text-muted mb-1">{{user.first_name}} {{user.last_name}}</p>
+              <p class="text-muted mb-1">{{user_data.email}}</p>
+              <p class="text-muted mb-1">{{user_data.mobile_number}}</p>
+              <br>
+             <div class="d-flex justify-content-center mb-2">
+                <a href="#"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary orange_button form-control" id="btn_submit">
+                    LOGOUT   <i style="font-size:15px" class="fa">&#xf011;</i></a>
+              </div>
+            </div>
+            </form>
+          </div>
+     
+        </div>
+        </div>
         
-<div class="msg8">
-<h5 class="nm">{{ user.username }}</h5>
-<p >{{ user.first_name}} {{ user.last_name }} </p><br> </div>
-<div class="msg8"><P class="nm">{{ user.email }}</P><br></div>
-<div class="msg8">
+    </div>
+  </section>
 
-    <a href="pass">CHANGE PASSWORD</a>
-</div>
-<div class="msg8">
-<a href="#"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        LOG OUT   <i style="font-size:15px" class="fa">&#xf011;</i></a>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
@@ -40,6 +78,16 @@
     </div>
     
 </div>
+<script>
+  let loadProfile = document.getElementById("profile");
+   loadProfile.onchange = function() {
+   
+    var profile = document.getElementById('profile_output');
+  profile.src = URL.createObjectURL(event.target.files[0]);
+  this.form.submit();
+    };
+    
+  </script>
 {% endblock %}
 </body>
 </html>

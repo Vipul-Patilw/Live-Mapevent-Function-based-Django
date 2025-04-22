@@ -5,7 +5,9 @@
          {% for event in events %}
          
          <div class="msg8">
-         
+          {% if event.event_poster %}
+          <img src="{{event.event_poster.url}}" class="img-responsive img-fluid w-100">
+         {% endif %}
          
          <h5> {{ event }} </h5>
          <P> {{ event.eventaddress}} </p>
@@ -21,11 +23,18 @@
                 
                 <div class="msg8">
                 <h1> Total Events Booked by All Users ({{eventcount.count}})</h1></div>
-        
+                <div class="row">
+                  <form method="post">
+                    {% csrf_token %}
+                <div class="col-md-6">
+                  <select class="form-select " name="event">
+                  <option value="">Show All</option>
                 {% for event in events1 %}
                 
-     
-                <div class="msg8">
+   
+      <option value="{{event}}">{{event}}</option>
+   
+                <!-- <div class="msg8">
                     
                    
                   <form method="post">
@@ -39,8 +48,13 @@
                     </form>   
                  
                          
-                </div>
+                </div> -->
                 {% endfor %}
+              </select>
+              </div>
+              <div class="col-md-6"><button type="submit" class="btn btn-primary">Download</button></div>
+              </form>
+              </div>
                   {% else %}
      <div align="center" class="msg8">
       <h1>No Events booked By any user!!</h1>

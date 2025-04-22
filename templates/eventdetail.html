@@ -8,21 +8,36 @@
  
  
  </style>       
-<div class="msg8">
+<div class="msg8 row">
 {% for event in eventinfo %}
-<h1 class="nm">{{ event.event }}</h1>
+{% if event.event_poster %}
+<div class="col-md-6 mb-5">
+   <img src="{{event.event_poster.url}}" class="img-fluid w-50">
+</div>
+{% endif %}
+<div class="col-md-6 mb-5">
+   <h1 class="nm">{{ event.event }}</h1>
 <p ><strong>Address:</strong>{{ event.eventaddress}}</p>
 <p><strong>Datetime: </strong>{{ event.fromdate }} to {{event.todate}} {{event.fromtime}} - {{event.totime}}</p><br>
-<h3>About the event</h3>
+{% if not event.event_poster %}
+<h3>About this event</h3>
 <p>{{event.info}}</p>
-
-<br><br><b> Locate on map:</b><a href="locate-{{event.lat}}&{{event.lang}}" style="margin-left: 10px;"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"><u>{{ event.eventaddress }}</u></a><br><br>
 <br>
-<div class="text-center">
+{% endif %}
+
+<b> Locate on map:</b><a href="locate-{{event.lat}}&{{event.lang}}" style="margin-left: 10px;"><img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-localisation-noire.png" style="height:20px;margin-top: -5px;"><u>{{ event.eventaddress }}</u></a><br><br>
+<br>
+<div class="text-center col-md-6">
 <a href="bookingform-{{event.id}}-{{user.email}}" class="btn btn-primary orange_button" >Book</a>
    </div>
-{% endfor %}
 </div>
+{% if event.event_poster %}
+<h3>About this event</h3>
+<p>{{event.info}}</p>
+{% endif %}
+</div>
+{% endfor %}
+
 {% endblock %}
 </body>
 </html>

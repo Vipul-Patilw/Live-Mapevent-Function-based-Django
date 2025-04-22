@@ -21,6 +21,10 @@ class Login(models.Model):
 
 	birthdate = models.DateField()
 
+	user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+	profile_pic = models.ImageField(upload_to= "users_profile",blank=True)
+
 	def __str__(self):
 		return self.first_name
 
@@ -87,6 +91,7 @@ class AddEvent(models.Model):
 		eventermail = models.CharField(max_length=122,default='bankpay980@gmail.com')
 		city = models.CharField(max_length=122,default='pune')
 		locate = models.CharField(max_length=122,default='dadar')
+		event_poster = models.ImageField(upload_to= "event_posters",blank=True)
 		
 
 		def __str__(self):
